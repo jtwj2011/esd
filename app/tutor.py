@@ -30,16 +30,20 @@ class Tutor(db.Model):
     subject_rate = db.relationship('Subject_rate', backref='tutor', lazy=True)
     gender = db.Column(db.String(1), nullable = False)
     review = db.relationship('Review', backref='tutor', lazy=True)
+    password_hash = db.Column(db.String(64))
 
 
-    def __init__(self, pid, contact_number, name, email, subject_rate):
+    def __init__(self, pid, contact_number, name, email, subject_rate, gender, review, password_hash):
         self.email = email
         self.contact_number = contact_number
         self.name = name
         self.subject_rate = subject_rate
+        self.gender = gender
+        self.review = review
+        self.password_hash = password_hash
 
     def json(self):
-        return {"email": self.email, "contact number": self.contact_number, "name": self.name, "address": self.address, "subjects and rates": self.subject_rate}
+        return {"email": self.email, "contact number": self.contact_number, "name": self.name, "address": self.address, "subjects and rates": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
 
 
 
