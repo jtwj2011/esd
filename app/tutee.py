@@ -12,7 +12,7 @@ CORS(app)
 class Tutee(db.Model):
     __tablename__ = 'tutee'
 
-    email = db.Column(db.String(64), primary_key = True)
+    tutee_id = db.Column(db.String(64), primary_key = True)
     password = db.Column(db.String(64), nullable = False)
     fullname = db.Column(db.String(64), nullable = False)
     gender = db.Column(db.String(1), nullable = False)
@@ -20,8 +20,8 @@ class Tutee(db.Model):
     address = db.Column(db.String(64), nullable = False)
     contact_number = db.Column(db.String(8), nullable = False)
 
-    def __init__(self, email, password, fullname, gender, age, address, contact_number):
-        self.email = email
+    def __init__(self, tutee_id, password, fullname, gender, age, address, contact_number):
+        self.tutee_id = tutee_id
         self.password = password
         self.fullname = fullname
         self.gender = gender
@@ -30,7 +30,7 @@ class Tutee(db.Model):
         self.contact_number = contact_number
 
     def json(self):
-        return {"email": self.email, "password": self.password, 
+        return {"tutee_id": self.tutee_id, "password": self.password, 
                 "fullname": self.fullname, "gender": self.gender, 
                 "age": self.age, "address": self.address, 
                 "contact_number": self.contact_number}
@@ -39,22 +39,22 @@ class Tutee(db.Model):
 def get_all():
     return jsonify({"tutees": [tutee.json() for tutee in Tutee.query.all()]})
 
-@app.route("/tutee/<string:email>")
-def find_by_email(email):
-    tutee = Tutee.query.filter_by(email=email).first()
+@app.route("/tutee/<string:tutee_id>")
+def find_by_tutee_id(tutee_id):
+    tutee = Tutee.query.filter_by(tutee_id=tutee_id).first()
     if tutee:
         return jsonify(tutee.json())
     return jsonify({"message": "Tutee not found"}), 404
 
 
 
-@app.route("/tutee/<string:email>", methods=['POST'])
-def create_tutee_profile():
-    if (Tutee.query.filter_by(email=email).first()):
+@app.route("/tutee/<string:tutee_id>", methods=['POST'])
+def create_tutee_profile(tutee_id):
+    if (Tutee.query.filter_by(tutee_id=tutee_id).first()):
         return jsonify({"message": "A tutee with username '{}' already exists.".format(username)}), 400
 
     data = request.get_json()
-    tutee = Tutee(email, **data) # ** means everything else after email
+    tutee = Tutee(tutee_id, **data) # ** means everything else after email
 
     try:
         db.session.add(tutee)
@@ -66,20 +66,20 @@ def create_tutee_profile():
 
 #attritubutes that can be updated:
 # email, contact, name, address, subject_rate
-@app.route("/tutee/<string:email>/<string:contact_number>/<string:password>/<string:fullname>/<string:address>/", methods=['POST'])
-def update_tutee_profile(email, contact_number, name, address, password):
-    if (Tutee.query.filter_by(email=email).first()):
-        tutee = Tutee.query.filter_by(email=email).first()
+@app.route("/tutee/<string:tutee_id>/<string:contact_number>/<string:password>/<string:fullname>/<string:address>/", methods=['POST'])
+def update_tutee_profile(tutee_id, contact_number, name, address, password):
+    if (Tutee.query.filter_by(tutee_id=tutee_id).first()):
+        tutee = Tutee.query.filter_by(tutee_id=tutee_id).first()
         # issue: how do we check if the email is unique inside the database
-        if tutee.email != email:
+        if tutee.tutee_id != tutee_id:
             try:
-                tutee.email = email
-                if (Tutee.query.filter_by(email=tutee.email).first()==False):
+                tutee.tutee_id = tutee_id
+                if (Tutee.query.filter_by(tutee_id=tutee.tutee_id).first()==False):
                     db.session.commit()
                 else:
-                    return jsonify({"message": "Email already exists."}), 500
+                    return jsonify({"message": "Tutee id already exists."}), 500
             except:
-                return jsonify({"message": "An error occurred when updating the email."}), 500
+                return jsonify({"message": "An error occurred when updating the tutee id."}), 500
 
         if tutee.contact_number != contact_number:
             try:
