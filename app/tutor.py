@@ -22,7 +22,7 @@ CORS(app)
 
 class Tutor(db.Model):
     __tablename__ = 'tutor'
-    email = db.Column(db.String(24), primary_key=True)
+    tutor_id = db.Column(db.String(24), primary_key=True)
     contact_number = db.Column(db.String(8), nullable=False)
     name = db.Column(db.String(12), nullable=False)
     location = db.Column(db.String(50), nullable=False)
@@ -34,8 +34,8 @@ class Tutor(db.Model):
     password_hash = db.Column(db.String(64))
 
 
-    def __init__(self, email, contact_number, name, location, level, subject, subject_rate, gender, review, password_hash):
-        self.email = email
+    def __init__(self, tutor_id, contact_number, name, location, level, subject, subject_rate, gender, review, password_hash):
+        self.tutor_id = tutor_id
         self.contact_number = contact_number
         self.name = name
         self.location = location
@@ -47,7 +47,7 @@ class Tutor(db.Model):
         self.password_hash = password_hash
 
     def json(self):
-        return {"email": self.email, "contact number": self.contact_number, "name": self.name, "location": self.location, "level": self.level,"subject": self.subject, "subject_rate": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
+        return {"tutor_id": self.tutor_id, "contact number": self.contact_number, "name": self.name, "location": self.location, "level": self.level,"subject": self.subject, "subject_rate": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
 
 
 # class Review(db.Model):
@@ -68,18 +68,18 @@ def get_all():
 	return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.all()]})
 
 
-@app.route("/tutor/<string:email>")
-def find_by_profile_id(email):
-    tutor = Tutor.query.filter_by(email=email).first()
+@app.route("/tutor/<string:tutor_id>")
+def find_by_profile_id(tutor_id):
+    tutor = Tutor.query.filter_by(tutor_id=tutor_id).first()
     if tutor:
-        return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(email=email).all()]})
+        return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(tutor_id=tutor_id).all()]})
     return jsonify({"message": "Profile not found."}), 404
 
 
-@app.route("/tutor/<string:email>", methods=['POST'])
-def create_tutor_profile(email):
-    if (Tutor.query.filter_by(email=email).first()):
-        return jsonify({"message": "A user with email '{}' already exists.".format(email)}), 400
+@app.route("/tutor/<string:tutor_id>", methods=['POST'])
+def create_tutor_profile(tutor_id):
+    if (Tutor.query.filter_by(tutor_id=tutor_id).first()):
+        return jsonify({"message": "A user with tutor_id '{}' already exists.".format(tutor_id)}), 400
 
     data = request.get_json()
     tutor = tutor(email, **data)
@@ -93,10 +93,10 @@ def create_tutor_profile(email):
     return jsonify(tutor.json()), 201
 
 
-@app.route("/tutor/<string:email>/<string:review>", methods=['POST'])
-def create_review(email,review):
-    if (Tutor.query.filter_by(email=email).first()):
-        tutor = Tutor.query.filter_by(email=email).first()
+@app.route("/tutor/<string:tutor_id>/<string:review>", methods=['POST'])
+def create_review(tutor_id,review):
+    if (Tutor.query.filter_by(tutor_id=tutor_id).first()):
+        tutor = Tutor.query.filter_by(tutor_id=tutor_id).first()
         try:
             tutor.review = review
             db.session.commit()
@@ -110,20 +110,20 @@ def create_review(email,review):
 
 #attritubutes that can be updated:
 # email, contact, name, address, subject_rate
-@app.route("/tutor/<string:email>/<string:contact_number>/<string:name>/<string:subject>/<string:subject_rate>/<string:address>/", methods=['POST'])
-def update_tutor_profile(email, contact_number, name, location, level, subject, subject_rate):
-    if (Tutor.query.filter_by(email=email).first()):
-        tutor = Tutor.query.filter_by(email=email).first()
+@app.route("/tutor/<string:tutor_id>/<string:contact_number>/<string:name>/<string:subject>/<string:subject_rate>/<string:address>/", methods=['PUT'])
+def update_tutor_profile(tutor_id, contact_number, name, location, level, subject, subject_rate):
+    if (Tutor.query.filter_by(tutor_id=tutor_id).first()):
+        tutor = Tutor.query.filter_by(tutor_id=tutor_id).first()
         # issue: how do we check if the email is unique inside the database
-        if tutor.email != email:
+        if tutor.tutor_id != tutor_id:
             try:
-                tutor.email = email
-                if (Tutor.query.filter_by(email=tutor.email).first()==False):
+                tutor.tutor_id = tutor_id
+                if (Tutor.query.filter_by(tutor_id=tutor.tutor_id).first()==False):
                     db.session.commit()
                 else:
-                    return jsonify({"message": "Email already exists."}), 500
+                    return jsonify({"message": "tutor_id already exists."}), 500
             except:
-                return jsonify({"message": "An error occurred when updating the email."}), 500
+                return jsonify({"message": "An error occurred when updating the tutor_id."}), 500
 
         if tutor.contact_number != contact_number:
             try:
@@ -154,11 +154,11 @@ def update_tutor_profile(email, contact_number, name, location, level, subject, 
 
 
 
-@app.route("/tutor/<string:gender>", methods=['POST'])
+@app.route("/tutor/gender/<string:gender>")
 def filter_by_gender(gender):
     tutor = Tutor.query.filter_by(gender=gender).first()
     if tutor:
-        return jsonify(tutor.json())
+        return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(gender=gender).all()]})
     return jsonify({"message": "Profile not found."}), 404
 
 

@@ -31,7 +31,7 @@ USE `tutor`;
 
 DROP TABLE IF EXISTS `tutor`;
 CREATE TABLE IF NOT EXISTS `tutor`(
-   `email` varchar(24) NOT NULL,
+   `tutor_id` varchar(24) NOT NULL,
    `contact_number` varchar(8) NOT NULL,
   `name` varchar(12) NOT NULL,
   `location` varchar(50) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `tutor`(
 --
 
 
-INSERT INTO `tutor` (`email`, `contact_number`, `name`, `location`, `level`, `subject`, `subject_rate`, `gender`, `review`, `password_hash`) VALUES
+INSERT INTO `tutor` (`tutor_id`, `contact_number`, `name`, `location`, `level`, `subject`, `subject_rate`, `gender`, `review`, `password_hash`) VALUES
 ('abc@gmail.com', '12345678', 'amy', 'west', 'primary', 'Math', '30', 'F', 'best tutor ever!', 'asdfgh'),
 ('abc@gmail.com', '12345678', 'amy', 'west', 'secondary', 'Science', '25', 'F', 'best tutor ever!', 'asdfgh'),
 ('abc@gmail.com', '12345678', 'amy', 'west', 'primary', 'Chinese', '35', 'F', 'best tutor ever!', 'asdfgh'),
