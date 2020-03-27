@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `tutor`(
   `gender` varchar(1) NOT NULL,
   `review` varchar(50) NOT NULL,
   `password_hash` varchar(64) NOT NULL,
-  PRIMARY KEY (`email`, `subject`)
+  PRIMARY KEY (`tutor_id`, `subject`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
