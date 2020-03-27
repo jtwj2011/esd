@@ -68,7 +68,7 @@ def get_all():
 	return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.all()]})
 
 
-@app.route("/tutor/<string:tutor_id>")
+@app.route("/tutor/profile/<string:tutor_id>")
 def find_by_profile_id(tutor_id):
     tutor = Tutor.query.filter_by(tutor_id=tutor_id).first()
     if tutor:
@@ -160,6 +160,25 @@ def filter_by_gender(gender):
     if tutor:
         return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(gender=gender).all()]})
     return jsonify({"message": "Profile not found."}), 404
+
+
+
+@app.route("/tutor/subject/<string:subject>")
+def filter_by_subject(subject):
+    tutor = Tutor.query.filter_by(subject=subject).first()
+    if tutor:
+        return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(subject=subject).all()]})
+    return jsonify({"message": "Profile not found."}), 404
+
+
+
+@app.route("/tutor/level/<string:level>")
+def filter_by_levels(level):
+    tutor = Tutor.query.filter_by(level=level).first()
+    if tutor:
+        return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(level=level).all()]})
+    return jsonify({"message": "Profile not found."}), 404
+
 
 
 
