@@ -38,41 +38,38 @@
     crossorigin="anonymous"></script>
     
     <style>
-    #booksTable {
+    /* #tutorsTable {
         empty-cells: hide;
-    }
+    } */
     </style>
 </head>
 
 <body>
     <div id="main-container" class="container">
         <h1 class="display-4">Tutor Search</h1>
-        <form id="form">
-            Subject<br>
-            <input type = "text" id = "subject"><br>
-            Location<br>
-            <input type = "text" id = "Location"><br>
-            Rate<br>
-            <input type = "text" id = "rate"><br>
-            Gender<br>
-            <input type = "text" id = "gender"><br>
-            <button type = "submit" id="submitBtn" class="btn btn-primary">Search</button>
-        </form>
-        <br>
         <table id="tutorsTable" class='table table-striped' border='1'>
             <thead class='thead-dark'>
                 <tr>
-                    <th>Subject</th>
-                    <th>Location</th>
-                    <th>Rate</th>
+                    <th>Name</th>
                     <th>Gender</th>
+                    <th>Location</th>
+                    <th>Level</th>
+                    <th>Subject</th>
+                    <th>Rate</th>
+                    <th>Contact Number</th>
+                    <th>Review</th>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                </tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr> -->
             </thead>
         </table>
         <br>
@@ -80,58 +77,68 @@
     </div>
 
     <script>
-        $("#form").submit(async (event) => {
-            // Prevents screen from refreshing when submitting
-            event.preventDefault();
+        // $("#form").submit(async (event) => {
+            // event.preventDefault();
 
-            // Helper function to display error message
-            function showError(message) {
-            // Clear table values in event of error
-            $('#tutorsTable td').eq(0).text("");
-            $('#tutorsTable td').eq(1).text("");
-            $('#tutorsTable td').eq(2).text("");
-            $('#tutorsTable td').eq(3).text("");
+            // // Helper function to display error message
+            // function showError(message) {
+            // // Clear table values in event of error
+            // $('#tutorsTable td').eq(0).text("");
+            // $('#tutorsTable td').eq(1).text("");
+            // $('#tutorsTable td').eq(2).text("");
+            // $('#tutorsTable td').eq(3).text("");
     
             // Display an error under the main container
-            $('#errors')
-                .text(message);
-            }
+            // $('#errors')
+            //     .text(message);
+            // }
 
-            // anonymous async function 
-            // - using await requires the function that calls it to be async
-        //     $(async() => {           
-        //         var isbnNumber = $("#isbn13").val();
-        //         // console.log(isbnNumber);
-        //         var serviceURL = "http://127.0.0.1:5000/find" + "/" + isbnNumber;
-        //         // console.log(serviceURL);
+            $(async() => {           
+                var serviceURL = "http://127.0.0.1:5001/tutor";
         
-        //         try {
-        //             const response =
-        //             await fetch(
-        //             serviceURL, { method: 'GET' }
-        //             );
-        //             const book = await response.json();
+                try {
+                    const response =
+                    await fetch(
+                    serviceURL, { method: 'GET' }
+                    );
+                    const data = await response.json();
+                    var tutors = data.Tutor;
+                    console.log(tutors);
+                    // console.log(!tutors);
+                    // console.log(tutors.length);
+
         
-        //             // invalid isbn
-        //             if (book.message) {
-        //                 showError('Book not found.')
-        //             } else {
-        //                 // console.log(book);
-        //                 $('#booksTable td').eq(0).text(book.title);
-        //                 $('#booksTable td').eq(1).text(book.isbn13);
-        //                 $('#booksTable td').eq(2).text(book.price);
-        //                 $('#booksTable td').eq(3).text(book.availability);
-        //                 // remove error messages from before if any
-        //                 $('#errors').text("");
-        //             }
-        //         } catch (error) {
-        //         // Errors when calling the service; such as network error, 
-        //         // service offline, etc
-        //         showError
-        //         ('There is a problem retrieving the book data, please try again later.<br />'+error);
-        //         }
-        //     });
-        });
+                    if (!tutors || !tutors.length) {
+                        showError('No tutors.')
+                    } else {
+                        var rows = "";
+                        // console.log(tutors);
+                        for (const tutor of tutors) {
+                            // console.log(tutor);
+                            eachRow = 
+                                "<td>" + tutor.name + "</td>" +
+                                "<td>" + tutor.gender + "</td>" +
+                                "<td>" + tutor.location + "</td>" +
+                                "<td>" + tutor.level + "</td>" +
+                                "<td>" + tutor.subject + "</td>" +
+                                "<td>" + tutor.subject_rate + "</td>" +
+                                "<td>" + tutor.contact_number + "</td>" +
+                                "<td>" + tutor.review + "</td>";
+                            // console.log(eachRow);
+                            rows += "<tr>" + eachRow + "</tr>";
+                            console.log(rows);
+                        }
+                        // console.log(book);
+                        $('#tutorsTable').append(rows);
+                    }
+                } catch (error) {
+                // Errors when calling the service; such as network error, 
+                // service offline, etc
+                // showError
+                // ('There is a problem retrieving the book data, please try again later.<br />'+error);
+                }
+            });
+        // });
     </script>
 </body>
 </html>
