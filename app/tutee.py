@@ -3,10 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tuition' # root for username, pw empty. if got pw -> root:pw@
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tuition'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app) # initialise connection to db
+db = SQLAlchemy(app)
 CORS(app)
 
 class Tutee(db.Model):
@@ -114,8 +114,5 @@ def update_tutee_profile(email, contact_number, name, address, password):
     else:
         return jsonify({"message": "User does not exist in the system."}), 400
 
-# basically prevents another file from doing app.run even if they import tutee.py
-# because then __name__ is tutee.py
-# but __main__ is the name of that file
 if __name__ == '__main__':
-    app.run(port = 5000, debug = True) # specify port in case u want to run more services
+    app.run(port = 5000, debug = True)

@@ -17,19 +17,19 @@ class Booking(db.Model):
     tutor_id = db.Column(db.String(64), nullable=False)
     tutee_id = db.Column(db.String(64), nullable=False)
     payment = db.Column(db.Float(precision=2), nullable=False)
-    subjects = db.Column(db.String(64), nullable=False)
+    subject = db.Column(db.String(64), nullable=False)
     status = db.Column(db.String(64), nullable=False)
 
-    def __init__(self, booking_id, tutor_id, tutee_id, payment, subjects):
+    def __init__(self, booking_id, tutor_id, tutee_id, payment, subject):
         self.booking_id = booking_id
         self.tutor_id = tutor_id
         self.tutee_id = tutee_id
         self.payment = payment
-        self.subjects = subjects
+        self.subject = subject
         self.status = status
 
     def json(self):
-        return {"booking_id": self.booking_id, "tutor_id": self.tutor_id, "tutee_id": self.tutee_id, "payment": self.payment, "subjects": self.subjects, "status": self.status}
+        return {"booking_id": self.booking_id, "tutor_id": self.tutor_id, "tutee_id": self.tutee_id, "payment": self.payment, "subject": self.subject, "status": self.status}
 
 
 @app.route("/booking")
