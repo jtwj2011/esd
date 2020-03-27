@@ -7,11 +7,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from os import environ
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('dbURL')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tutor'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tutor'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -26,57 +25,47 @@ class Tutor(db.Model):
     email = db.Column(db.String(24), primary_key=True)
     contact_number = db.Column(db.String(8), nullable=False)
     name = db.Column(db.String(12), nullable=False)
-    address = db.Column(db.String(50), nullable=False)
-    subject_rate = db.relationship('Subject_rate', backref='tutor', lazy=True)
+    location = db.Column(db.String(50), nullable=False)
+    level = db.Column(db.String(50), nullable=False)
+    subject = db.Column(db.String(50), primary_key = True)
+    subject_rate = db.Column(db.String(50), nullable=False)
     gender = db.Column(db.String(1), nullable = False)
-    review = db.relationship('Review', backref='tutor', lazy=True)
+    review = db.Column(db.String(50), nullable = False)
     password_hash = db.Column(db.String(64))
 
 
-    def __init__(self, pid, contact_number, name, email, subject_rate, gender, review, password_hash):
+    def __init__(self, email, contact_number, name, location, level, subject, subject_rate, gender, review, password_hash):
         self.email = email
         self.contact_number = contact_number
         self.name = name
+        self.location = location
+        self.level = level
+        self.subject = subject
         self.subject_rate = subject_rate
         self.gender = gender
         self.review = review
         self.password_hash = password_hash
 
     def json(self):
-        return {"email": self.email, "contact number": self.contact_number, "name": self.name, "address": self.address, "subjects and rates": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
+        return {"email": self.email, "contact number": self.contact_number, "name": self.name, "location": self.location, "level": self.level,"subject": self.subject, "subject_rate": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
 
 
+# class Review(db.Model):
+#     email = db.Column(db.String(24), primary_key=True)
+#     # didnt set nullable=False to allow zero records
+#     review_record = db.Column(db.String(100))
 
-class Subject_rate(db.Model):
-    email = db.Column(db.String(24), primary_key=True)
-    subject = db.Column(db.String(10), nullable=False)
-    rate = db.Column(db.Integer)
+#     def __init__(self, email, review_record):
+#         self.email = email
+#         self.review_record = review_record
 
-    def __init__(self, email, suject, rate):
-        self.email = email
-        self.subject = subject
-        self.rate = rate
-
-    def json(self):
-        return {"email": self.email, "subject": self.subject, "rate": self.rate}
-
-
-class Review(db.Model):
-    email = db.Column(db.String(24), primary_key=True)
-    # didnt set nullable=False to allow zero records
-    review_record = db.Column(db.String(100))
-
-    def __init__(self, email, review_record):
-        self.email = email
-        self.review_record = review_record
-
-    def json(self):
-        return {"email": self.email, "review_record": self.review_record}
+#     def json(self):
+#         return {"email": self.email, "review_record": self.review_record}
 
 
 @app.route("/tutor")
 def get_all():
-	return jsonify({"tutor": [profile.json() for profile in Tutor.query.all()]})
+	return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.all()]})
 
 
 @app.route("/tutor/<string:email>")
@@ -88,7 +77,7 @@ def find_by_profile_id(email):
 
 
 @app.route("/tutor/<string:email>", methods=['POST'])
-def create_tutor_profile():
+def create_tutor_profile(email):
     if (Tutor.query.filter_by(email=email).first()):
         return jsonify({"message": "A user with email '{}' already exists.".format(email)}), 400
 
@@ -105,7 +94,7 @@ def create_tutor_profile():
 
 
 @app.route("/tutor/<string:email>/<string:review>", methods=['POST'])
-def create_review():
+def create_review(email,review):
     if (Tutor.query.filter_by(email=email).first()):
         tutor = Tutor.query.filter_by(email=email).first()
         try:
@@ -121,8 +110,8 @@ def create_review():
 
 #attritubutes that can be updated:
 # email, contact, name, address, subject_rate
-@app.route("/tutor/<string:email>/<string:contact_number>/<string:name>/<string:address>/", methods=['POST'])
-def update_tutor_profile(email, contact_number, name, address):
+@app.route("/tutor/<string:email>/<string:contact_number>/<string:name>/<string:subject>/<string:subject_rate>/<string:address>/", methods=['POST'])
+def update_tutor_profile(email, contact_number, name, location, level, subject, subject_rate):
     if (Tutor.query.filter_by(email=email).first()):
         tutor = Tutor.query.filter_by(email=email).first()
         # issue: how do we check if the email is unique inside the database
@@ -175,10 +164,10 @@ def filter_by_gender(gender):
 
 
 #filter by level, subject, price range
-@app.route("/tutor/<string:level>/<string:subject>/<string:rate>", methods=['POST'])
-def filter_by_level_subject_rate(level, subject, rate):
+# @app.route("/tutor/<string:level>/<string:subject>/<string:rate>", methods=['POST'])
+# def filter_by_level_subject_rate(level, subject, rate):
 
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(port=5001, debug=True)
