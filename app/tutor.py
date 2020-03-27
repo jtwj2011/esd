@@ -27,7 +27,7 @@ class Tutor(db.Model):
     name = db.Column(db.String(12), nullable=False)
     location = db.Column(db.String(50), nullable=False)
     level = db.Column(db.String(50), nullable=False)
-    subject = db.Column(db.String(50), nullable=False)
+    subject = db.Column(db.String(50), primary_key = True)
     subject_rate = db.Column(db.String(50), nullable=False)
     gender = db.Column(db.String(1), nullable = False)
     review = db.Column(db.String(50), nullable = False)
