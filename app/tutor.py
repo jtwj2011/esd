@@ -26,39 +26,29 @@ class Tutor(db.Model):
     email = db.Column(db.String(24), primary_key=True)
     contact_number = db.Column(db.String(8), nullable=False)
     name = db.Column(db.String(12), nullable=False)
-    address = db.Column(db.String(50), nullable=False)
-    subject_rate = db.relationship('Subject_rate', backref='tutor', lazy=True)
+    location = db.Column(db.String(50), nullable=False)
+    level = db.Column(db.String(50), nullable=False)
+    subject = db.Column(db.String(50), nullable=False)
+    subject_rate = db.Column(db.string(50), nullable=False)
     gender = db.Column(db.String(1), nullable = False)
     review = db.relationship('Review', backref='tutor', lazy=True)
     password_hash = db.Column(db.String(64))
 
 
-    def __init__(self, pid, contact_number, name, email, subject_rate, gender, review, password_hash):
+    def __init__(self, email, contact_number, name, location, level, subject, subject_rate, gender, review, password_hash):
         self.email = email
         self.contact_number = contact_number
         self.name = name
-        self.subject_rate = subject_rate
+	self.location = location
+	self.level = level
+        self.subject = subject
+	self.subject_rate = subject_rate
         self.gender = gender
         self.review = review
         self.password_hash = password_hash
 
     def json(self):
-        return {"email": self.email, "contact number": self.contact_number, "name": self.name, "address": self.address, "subjects and rates": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
-
-
-
-class Subject_rate(db.Model):
-    email = db.Column(db.String(24), primary_key=True)
-    subject = db.Column(db.String(10), nullable=False)
-    rate = db.Column(db.Integer)
-
-    def __init__(self, email, suject, rate):
-        self.email = email
-        self.subject = subject
-        self.rate = rate
-
-    def json(self):
-        return {"email": self.email, "subject": self.subject, "rate": self.rate}
+        return {"email": self.email, "contact number": self.contact_number, "name": self.name, "location": self.location, "level": self.level,"subject": self.subject, "subject_rate": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
 
 
 class Review(db.Model):
@@ -121,8 +111,8 @@ def create_review():
 
 #attritubutes that can be updated:
 # email, contact, name, address, subject_rate
-@app.route("/tutor/<string:email>/<string:contact_number>/<string:name>/<string:address>/", methods=['POST'])
-def update_tutor_profile(email, contact_number, name, address):
+@app.route("/tutor/<string:email>/<string:contact_number>/<string:name>/<string:subject>/<string:subject_rate>/<string:address>/", methods=['POST'])
+def update_tutor_profile(email, contact_number, name, location, level, subject, subject_rate):
     if (Tutor.query.filter_by(email=email).first()):
         tutor = Tutor.query.filter_by(email=email).first()
         # issue: how do we check if the email is unique inside the database
@@ -181,4 +171,4 @@ def filter_by_level_subject_rate(level, subject, rate):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
