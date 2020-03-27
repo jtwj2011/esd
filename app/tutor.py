@@ -47,7 +47,7 @@ class Tutor(db.Model):
         self.password_hash = password_hash
 
     def json(self):
-        return {"tutor_id": self.tutor_id, "contact number": self.contact_number, "name": self.name, "location": self.location, "level": self.level,"subject": self.subject, "subject_rate": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
+        return {"tutor_id": self.tutor_id, "contact_number": self.contact_number, "name": self.name, "location": self.location, "level": self.level,"subject": self.subject, "subject_rate": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
 
 
 # class Review(db.Model):
