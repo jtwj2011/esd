@@ -82,7 +82,7 @@ def create_tutor_profile(tutor_id):
         return jsonify({"message": "A user with tutor_id '{}' already exists.".format(tutor_id)}), 400
 
     data = request.get_json()
-    tutor = tutor(email, **data)
+    tutor = tutor(tutor_id, **data)
 
     try:
         db.session.add(tutor)
@@ -139,9 +139,9 @@ def update_tutor_profile(tutor_id, contact_number, name, location, level, subjec
             except:
                 return jsonify({"message": "An error occurred when updating the name."}), 500
 
-        if tutor.address != address:
+        if tutor.location != location:
             try:
-                tutor.address = address
+                tutor.location = location
                 db.session.commit()
             except:
                 return jsonify({"message": "An error occurred when updating the address."}), 500
