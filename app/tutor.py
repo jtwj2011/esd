@@ -72,7 +72,7 @@ def get_all():
 def find_by_profile_id(email):
     tutor = Tutor.query.filter_by(email=email).first()
     if tutor:
-        return jsonify(tutor.json())
+        return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(email=email).all()]})
     return jsonify({"message": "Profile not found."}), 404
 
 
