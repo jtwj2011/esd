@@ -7,45 +7,46 @@
     <meta name="viewport" content="width=device-width">
 
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-	
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script 
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    </script>
 </head>
 
 <body>
-    	<div class="w3layouts-main">
-		<br><br><br><br><br>
-			<div class="header-main">
-			<h1 style="font-size:40px;color:black">Expert Tutors</h1>
-			<br>
-				<div class="main-icon">
-
-
-
-<i class="fa fa-book" style="font-size:100px;color:black"></i>
-<br>
-				</div>
+    <div class="w3layouts-main">
+    <br><br><br><br><br>
+        <div class="header-main">
+            <h1 style="font-size:40px;color:black">Expert Tutors</h1>
+            <br>
+            <div class="main-icon">
+                <i class="fa fa-book" style="font-size:100px;color:black"></i>
+                <br>
+            </div>
 				<br>
-				
-				<div class="header-left-bottom">
-					<form action="login.php" method="post">
-						<div class="icon1">
-							<span class="fa fa-user"></span>
-							<input type="text" placeholder="Username" name="username" id="username" required="" />
-						</div>
-						<div class="icon1">
-							<span class="fa fa-lock"></span>
-							<input type="password" placeholder="Password" name="password" id="password" required="" />
-						</div>
-						<div class="bottom">
-							<button type="submit" class="btn"style="font-size:17.5px;color:black">Login</button>
-						</div>
-                        <br>
-                        </form>
-						<div class="signup">
-							<button class="btn" style="font-size:17.5px;color:black"><a href="register.html">Register</button></a></div>
-						</div>
-					
-				</div>
+            <div class="header-left-bottom">
+                <!-- <form action="login.php" method="POST"> -->
+                <form id="form" method="GET">
+                    <div class="icon1">
+                        <span class="fa fa-user"></span>
+                        <input type="text" placeholder="Username" name="username" id="username" required="" />
+                    </div>
+                    <div class="icon1">
+                        <span class="fa fa-lock"></span>
+                        <input type="password" placeholder="Password" name="password" id="password" required="" />
+                    </div>
+                    <div class="bottom">
+                        <button type="submit" class="btn"style="font-size:17.5px;color:black">Login</button>
+                    </div>
+                    <br>
+                </form>
+                <div class="signup">
+                    <button class="btn" style="font-size:17.5px;color:black"><a href="register.html">Register</button></a></div>
+                </div>
+            </div>
 				<div class="error" align="center">
 					<h5><?= $error ?></h5>
 				</div>
@@ -56,56 +57,36 @@
     
     <script>
         $("#form").submit(async (event) => {
-            // Prevents screen from refreshing when submitting
             event.preventDefault();
 
-            // Helper function to display error message
-            function showError(message) {
-            // Clear table values in event of error
-            // $('#tutorsTable td').eq(0).text("");
-            // $('#tutorsTable td').eq(1).text("");
-            // $('#tutorsTable td').eq(2).text("");
-            // $('#tutorsTable td').eq(3).text("");
-    
-            // Display an error under the main container
-            $('#errors')
-                .text(message);
-            }
-
-            // anonymous async function 
-            // - using await requires the function that calls it to be async
-        //     $(async() => {           
-        //         var isbnNumber = $("#isbn13").val();
-        //         // console.log(isbnNumber);
-        //         var serviceURL = "http://127.0.0.1:5000/find" + "/" + isbnNumber;
-        //         // console.log(serviceURL);
+            $(async() => {           
+                var email = $("#username").val();
+                var serviceURL = "http://127.0.0.1:5000/tutee" + "/" + email;
         
-        //         try {
-        //             const response =
-        //             await fetch(
-        //             serviceURL, { method: 'GET' }
-        //             );
-        //             const book = await response.json();
+                try {
+                    const response =
+                    await fetch (
+                        serviceURL, 
+                        { method: 'GET' }
+                    );
+                    const tutee = await response.json();
         
-        //             // invalid isbn
-        //             if (book.message) {
-        //                 showError('Book not found.')
-        //             } else {
-        //                 // console.log(book);
-        //                 $('#booksTable td').eq(0).text(book.title);
-        //                 $('#booksTable td').eq(1).text(book.isbn13);
-        //                 $('#booksTable td').eq(2).text(book.price);
-        //                 $('#booksTable td').eq(3).text(book.availability);
-        //                 // remove error messages from before if any
-        //                 $('#errors').text("");
-        //             }
-        //         } catch (error) {
-        //         // Errors when calling the service; such as network error, 
-        //         // service offline, etc
-        //         showError
-        //         ('There is a problem retrieving the book data, please try again later.<br />'+error);
-        //         }
-        //     });
+                    // invalid tutee
+                    if (tutee.message) {
+                        // console.log("Tutee not found");
+                    } else {
+                        if ($("#password").val() == tutee.password) {
+                            window.location.replace("find-tutor.html");
+                        } else {
+                            alert("Password is incorrect.");    
+                        }
+                    }
+                } catch (error) {
+                // Errors when calling the service; such as network error, service offline, etc
+                // showError
+                // ('There is a problem retrieving the tutee data, please try again later.<br />'+error);
+                }
+            });
         });
     </script>
 </body>
