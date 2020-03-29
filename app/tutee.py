@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tuition'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tutee'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -13,27 +16,27 @@ class Tutee(db.Model):
     __tablename__ = 'tutee'
 
     tutee_id = db.Column(db.String(64), primary_key = True)
-    password = db.Column(db.String(64), nullable = False)
-    fullname = db.Column(db.String(64), nullable = False)
+    contact_number = db.Column(db.String(8), nullable = False)
+    name = db.Column(db.String(64), nullable = False)
     gender = db.Column(db.String(1), nullable = False)
     age = db.Column(db.Integer, nullable = False)
     address = db.Column(db.String(64), nullable = False)
-    contact_number = db.Column(db.String(8), nullable = False)
+    password_hash = db.Column(db.String(64), nullable = False)
 
-    def __init__(self, tutee_id, password, fullname, gender, age, address, contact_number):
+    def __init__(self, tutee_id, contact_number, name, gender, age, address, password_hash):
         self.tutee_id = tutee_id
-        self.password = password
-        self.fullname = fullname
+        self.contact_number = contact_number
+        self.name = name
         self.gender = gender
         self.age = age
         self.address = address
-        self.contact_number = contact_number
+        self.password_hash = password_hash
 
     def json(self):
-        return {"tutee_id": self.tutee_id, "password": self.password, 
-                "fullname": self.fullname, "gender": self.gender, 
+        return {"tutee_id": self.tutee_id, "contact_number": self.contact_number, 
+                "name": self.name, "gender": self.gender, 
                 "age": self.age, "address": self.address, 
-                "contact_number": self.contact_number}
+                "password_hash": self.password_hash}
 
 @app.route("/tutee")
 def get_all():
@@ -48,7 +51,7 @@ def find_by_tutee_id(tutee_id):
 
 
 
-@app.route("/tutee/<string:tutee_id>", methods=['POST'])
+@app.route("/tutee/profile/<string:tutee_id>", methods=['POST'])
 def create_tutee_profile(tutee_id):
     if (Tutee.query.filter_by(tutee_id=tutee_id).first()):
         return jsonify({"message": "A tutee with username '{}' already exists.".format(username)}), 400
@@ -67,7 +70,7 @@ def create_tutee_profile(tutee_id):
 #attritubutes that can be updated:
 # email, contact, name, address, subject_rate
 @app.route("/tutee/<string:tutee_id>/<string:contact_number>/<string:password>/<string:fullname>/<string:address>/", methods=['POST'])
-def update_tutee_profile(tutee_id, contact_number, name, address, password):
+def update_tutee_profile(tutee_id, contact_number, name, address):
     if (Tutee.query.filter_by(tutee_id=tutee_id).first()):
         tutee = Tutee.query.filter_by(tutee_id=tutee_id).first()
         # issue: how do we check if the email is unique inside the database

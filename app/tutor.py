@@ -25,7 +25,6 @@ class Tutor(db.Model):
     tutor_id = db.Column(db.String(24), primary_key=True)
     contact_number = db.Column(db.String(8), nullable=False)
     name = db.Column(db.String(12), nullable=False)
-    location = db.Column(db.String(50), nullable=False)
     level = db.Column(db.String(50), nullable=False)
     subject = db.Column(db.String(50), primary_key = True)
     subject_rate = db.Column(db.String(50), nullable=False)
@@ -34,11 +33,10 @@ class Tutor(db.Model):
     password_hash = db.Column(db.String(64))
 
 
-    def __init__(self, tutor_id, contact_number, name, location, level, subject, subject_rate, gender, review, password_hash):
+    def __init__(self, tutor_id, contact_number, name, level, subject, subject_rate, gender, review, password_hash):
         self.tutor_id = tutor_id
         self.contact_number = contact_number
         self.name = name
-        self.location = location
         self.level = level
         self.subject = subject
         self.subject_rate = subject_rate
@@ -47,7 +45,7 @@ class Tutor(db.Model):
         self.password_hash = password_hash
 
     def json(self):
-        return {"tutor_id": self.tutor_id, "contact_number": self.contact_number, "name": self.name, "location": self.location, "level": self.level,"subject": self.subject, "subject_rate": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
+        return {"tutor_id": self.tutor_id, "contact_number": self.contact_number, "name": self.name, "level": self.level,"subject": self.subject, "subject_rate": self.subject_rate, "gender": self.gender, "review": self.review, "password_hash": self.password_hash}
 
 
 # class Review(db.Model):
@@ -110,8 +108,8 @@ def create_review(tutor_id,review):
 
 #attritubutes that can be updated:
 # email, contact, name, address, subject_rate
-@app.route("/tutor/<string:tutor_id>/<string:contact_number>/<string:name>/<string:subject>/<string:subject_rate>/<string:address>/", methods=['PUT'])
-def update_tutor_profile(tutor_id, contact_number, name, location, level, subject, subject_rate):
+@app.route("/tutor/<string:tutor_id>/<string:contact_number>/<string:name>/<string:level>/<string:subject>/<string:subject_rate>", methods=['PUT'])
+def update_tutor_profile(tutor_id, contact_number, name, level, subject, subject_rate):      #how to change password?   
     if (Tutor.query.filter_by(tutor_id=tutor_id).first()):
         tutor = Tutor.query.filter_by(tutor_id=tutor_id).first()
         # issue: how do we check if the email is unique inside the database
@@ -139,12 +137,27 @@ def update_tutor_profile(tutor_id, contact_number, name, location, level, subjec
             except:
                 return jsonify({"message": "An error occurred when updating the name."}), 500
 
-        if tutor.location != location:
+        if tutor.level != level:
             try:
-                tutor.location = location
+                tutor.level = level
                 db.session.commit()
             except:
-                return jsonify({"message": "An error occurred when updating the address."}), 500
+                return jsonify({"message": "An error occurred when updating the level."}), 500
+
+        if tutor.subject != subject:
+            try:
+                tutor.subject = subject
+                db.session.commit()
+            except:
+                return jsonify({"message": "An error occurred when updating the subject."}), 500
+
+        if tutor.subject_rate != subject_rate:
+            try:
+                tutor.subject_rate = subject_rate
+                db.session.commit()
+            except:
+                return jsonify({"message": "An error occurred when updating the subject rate."}), 500
+
 
         return jsonify(tutor.json()), 201
 
