@@ -1,6 +1,7 @@
 # handles profile upload and booking request?
 
 
+
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
@@ -24,7 +25,7 @@ CORS(app)
 class Tutor(db.Model):
     __tablename__ = 'tutor'
     tutor_id = db.Column(db.String(24), primary_key=True)
-    tutor_contact_number = db.Column(db.String(8), nullable=False)
+    contact_number = db.Column(db.String(8), nullable=False)
     name = db.Column(db.String(12), nullable=False)
     level = db.Column(db.String(50), nullable=False)
     subject = db.Column(db.String(50), primary_key = True)
