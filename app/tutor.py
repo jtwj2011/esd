@@ -199,7 +199,12 @@ def view_all_requests(tutor_id):
     bookings = requests.post(viewrequestsURL, json = tutor_id)
     print(bookings)
 
-
+filterbookingbystatusURL = "http://localhost:5002/booking/status/<status>"
+def filter_by_booking_status(status):
+    status = json.loads(json.dumps(status, default=str))
+    bookings = requests.post(filterbookingbystatusURL, json = status)
+    #display bookings
+    print(booking)
 
 
 #filter by level, subject, price range

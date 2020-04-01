@@ -9,6 +9,14 @@ from flask_cors import CORS
 
 import requests
 
+# create flask application
+app = Flask(__name__)
+CORS(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/booking'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
 #create database for booking
 # create flask application
 app = Flask(__name__)
@@ -24,7 +32,7 @@ class Booking(db.Model):
     booking_id = db.Column(db.String(13), primary_key=True)
     tutee_id = db.Column(db.String(64), nullable=False)
     tutor_id = db.Column(db.String(64), nullable=False)
-    payment = db.Column(db.Float(precision=2), nullable=False)
+    payment = db.Column(db.String(64), nullable=False)
     status = db.Column(db.String(64), nullable=False)
     subject = db.Column(db.String(64), nullable=False)
 
@@ -36,12 +44,8 @@ class Booking(db.Model):
         self.status = status
         self.subject = subject
 
-
-
     def json(self):
         return {"booking_id": self.booking_id, "tutee_id": self.tutee_id, "tutor_id": self.tutor_id, "payment": self.payment, "status": self.status, "subject": self.subject}
-
-
 
 # set up for AMQP messaging
 hostname = "localhost" # default host
@@ -108,9 +112,9 @@ def get_all_bookings_for_tutor(tutor_id):
 
 @app.route("/booking/status/<string:status>")
 def get_all_bookings_based_status(status):
-    status = Booking.query.filter_by(status=status)
-    if status:
-        return jsonify({"Bookings": [status.json() for status in Booking.query.all()]})
+    bookings = Booking.query.filter_by(status=status)
+    if bookings:
+        return jsonify({"Bookings": [status.json() for status in Booking.query.filter_by(status=status)]})
     return jsonify({"message": "Status not found"}), 404
     
 @app.route("/booking/<string:booking_id>")
