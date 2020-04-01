@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS `booking` (
   `booking_id` varchar(20) NOT NULL,
   `tutor_id` varchar(20) NOT NULL,
   `tutee_id` varchar(20) NOT NULL,
-  `payment` decimal(10,2) NOT NULL,
   `subject` varchar(20) NOT NULL,
+  `payment` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`booking_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS `booking` (
 --
 
 
-INSERT INTO `booking` (`booking_id`, `tutor_id`, `tutee_id`, `payment`, `subject`, `status`) VALUES
-('BK001', 'TUT001', 'TEE001', '50.00', 'Math', 'Ongoing'),
-('BK002', 'TUT002','TEE002', '45.00', 'Science', 'Ongoing');
+INSERT INTO `booking` (`booking_id`, `tutor_id`, `tutee_id`, `subject`, `payment`, `status`) VALUES
+('BK001', 'TUT001', 'TEE001', 'Math', 'Pending' 'Ongoing'),
+('BK002', 'TUT002','TEE002', 'Science', 'Success', 'Ongoing');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
