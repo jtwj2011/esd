@@ -103,11 +103,18 @@ def get_all_bookings_for_tutor(tutor_id):
         return jsonify(tutorid.json()), 200
     return jsonify({"message": "Tutor ID not found"}), 404
 
-@app.route("/booking/status/<string:status>")
-def get_all_bookings_based_status(status):
-    bookings = Booking.query.filter_by(status=status)
+@app.route("/booking/status/<string:status>/tutor/<tutor_id>")
+def get_all_bookings_based_status(status, tutor_id):
+    bookings = Booking.query.filter_by(status=status, tutor_id=tutor_id)
     if bookings:
-        return jsonify({"Bookings": [status.json() for status in Booking.query.filter_by(status=status)]})
+        return jsonify({"Bookings": [status.json() for status in Booking.query.filter_by(status=status, tutor_id=tutor_id)]})
+    return jsonify({"message": "Status not found"}), 404
+
+@app.route("/booking/status/<string:status>/tutee/<tutee_id>")
+def get_all_bookings_based_status_tutee(status, tutee_id):
+    bookings = Booking.query.filter_by(status=status, tutee_id=tutee_id)
+    if bookings:
+        return jsonify({"Bookings": [status.json() for status in Booking.query.filter_by(status=status, tutee_id=tutee_id)]})
     return jsonify({"message": "Status not found"}), 404
     
 @app.route("/booking/<string:booking_id>")

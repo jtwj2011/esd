@@ -135,13 +135,12 @@ def view_particular_booking(booking_id):
     #display bookings
     print(booking)
 
-filterbookingbystatusURL = "http://localhost:5002/booking/status/<status>"
+filterbookingbystatusURL = "http://localhost:5002/booking/status/<status>/tutee/<tutee_id>"
 def filter_by_booking_status(status):
     status = json.loads(json.dumps(status, default=str))
     bookings = requests.post(filterbookingbystatusURL, json = status)
     #display bookings
     print(booking)
-
 
 if __name__ == '__main__':
     app.run(port = 5000, debug = True)
