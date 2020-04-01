@@ -128,7 +128,19 @@ def view_bookings(tutee_id):
     #display bookings
     print(bookings)
 
-#def view_particular_booking(booking_id):
+viewsepcificbookingURL = "http://localhost:5002/booking/<booking_id>"
+def view_particular_booking(booking_id):
+    booking_id = json.loads(json.dumps(booking_id, default=str))
+    booking = requests.post(viewspecificbookingURL, json = booking_id)
+    #display bookings
+    print(booking)
+
+filterbookingbystatusURL = "http://localhost:5002/booking/status/<status>"
+def filter_by_booking_status(status):
+    status = json.loads(json.dumps(status, default=str))
+    bookings = requests.post(filterbookingbystatusURL, json = status)
+    #display bookings
+    print(booking)
 
 
 if __name__ == '__main__':
