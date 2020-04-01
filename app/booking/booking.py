@@ -1,15 +1,40 @@
 import json
 import sys
 import os
-
-# Communication patterns:
-# Use a message-broker with 'topic' exchange to enable interaction
 import pika
 
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
+import requests
+
+#create database for booking
+
+class Booking(db.Model):
+    __tablename__ = 'booking'
+
+    booking_id = db.Column(db.String(13), primary_key=True)
+    tutee_id = db.Column(db.String(64), nullable=False)
+    tutor_id = db.Column(db.String(64), nullable=False)
+    payment = db.Column(db.Float(precision=2), nullable=False)
+    status = db.Column(db.String(64), nullable=False)
+    subject = db.Column(db.String(64), nullable=False)
+
+    def __init__(self, booking_id, tutee_id, tutor_id, payment, status, subject):
+        self.booking_id = booking_id
+        self.tutee_id = tutee_id
+        self.tutor_id = tutor_id
+        self.payment = payment
+        self.status = status
+        self.subject = subject
+
+
+
+    def json(self):
+        return {"booking_id": self.booking_id, "tutee_id": self.tutee_id, "tutor_id": self.tutor_id, "payment": self.payment, "status": self.status, "subject": self.subject}
+
+# create flask application
 app = Flask(__name__)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/booking'
@@ -17,6 +42,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+# set up for AMQP messaging
 hostname = "localhost" # default host
 port = 5672 # default port
 # connect to the broker and set up a communication channel in the connection
@@ -28,7 +54,6 @@ exchangename="tutee_topic"
 channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
 def receiveRequest():
-
     # prepare a queue for receiving messages
     channelqueue = channel.queue_declare(queue='', exclusive=-True) # '' indicates a random unique queue name; 'exclusive' indicates the queue is used only by this receiver and will be deleted if the receiver disconnects.
         # If no need durability of the messages, no need durable queues, and can use such temp random queues.
@@ -61,30 +86,7 @@ def create_booking(request):
 
     return jsonify(booking.json()), 201
 
-class Booking(db.Model):
-    __tablename__ = 'booking'
-
-    booking_id = db.Column(db.String(13), primary_key=True)
-    tutee_id = db.Column(db.String(64), nullable=False)
-    tutor_id = db.Column(db.String(64), nullable=False)
-    payment = db.Column(db.Float(precision=2), nullable=False)
-    status = db.Column(db.String(64), nullable=False)
-    subject = db.Column(db.String(64), nullable=False)
-
-    def __init__(self, booking_id, tutee_id, tutor_id, payment, status, subject):
-        self.booking_id = booking_id
-        self.tutee_id = tutee_id
-        self.tutor_id = tutor_id
-        self.payment = payment
-        self.status = status
-        self.subject = subject
-
-
-
-    def json(self):
-        return {"booking_id": self.booking_id, "tutee_id": self.tutee_id, "tutor_id": self.tutor_id, "payment": self.payment, "status": self.status, "subject": self.subject}
-
-
+#used for HTTP invocations
 @app.route("/booking")
 def get_all():
     return jsonify({"Bookings": [booking.json() for booking in Booking.query.all()]})
@@ -100,7 +102,7 @@ def get_all_bookings_for_tutee(tutee_id):
 def get_all_bookings_for_tutor(tutor_id):
     tutorid = Booking.query.filter_by(tutor_id=tutor_id).first()
     if tutorid:
-        return jsonify(tutorid.json())
+        return jsonify(tutorid.json()), 200
     return jsonify({"message": "Tutor ID not found"}), 404
 
 @app.route("/booking/status/<string:status>")
@@ -114,7 +116,7 @@ def get_all_bookings_based_status(status):
 def find_by_booking_id(booking_id):
     booking_id = Booking.query.filter_by(booking_id=booking_id).first()
     if booking_id:
-        return jsonify(booking_id.json())
+        return jsonify(booking_id.json()), 200
     return jsonify({"message": "Booking ID not found."}), 404
 
 

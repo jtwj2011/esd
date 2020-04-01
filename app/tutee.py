@@ -1,9 +1,13 @@
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+import json
+import sys
+import os
+import pika
 
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tutee'
@@ -116,6 +120,16 @@ def update_tutee_profile(tutee_id, contact_number, name, address):
 
     else:
         return jsonify({"message": "User does not exist in the system."}), 400
+
+viewbookingsURL = "http://localhost:5002/booking/tutee/<tuteeid>"
+def view_bookings(tutee_id):
+    tutee_id = json.loads(json.dumps(tutee_id, default=str))
+    bookings = requests.post(viewbookingsURL, json = tutee_id)
+    #display bookings
+    print(bookings)
+
+#def view_particular_booking(booking_id):
+
 
 if __name__ == '__main__':
     app.run(port = 5000, debug = True)

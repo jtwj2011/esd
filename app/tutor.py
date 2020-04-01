@@ -8,6 +8,7 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tutor'
@@ -191,6 +192,12 @@ def filter_by_levels(level):
     if tutor:
         return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(level=level).all()]})
     return jsonify({"message": "Profile not found."}), 404
+
+viewrequetsURL = "http:localhost:5002/tutor/<tutor_id>"
+def view_all_requests(tutor_id):
+    tutor_id = json.loads(json.dumps(tutor_id, default=str))
+    bookings = requests.post(viewrequestsURL, json = tutor_id)
+    print(bookings)
 
 
 
