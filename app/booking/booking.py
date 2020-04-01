@@ -10,6 +10,13 @@ from flask_cors import CORS
 import requests
 
 #create database for booking
+# create flask application
+app = Flask(__name__)
+CORS(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/booking'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 class Booking(db.Model):
     __tablename__ = 'booking'
@@ -34,13 +41,7 @@ class Booking(db.Model):
     def json(self):
         return {"booking_id": self.booking_id, "tutee_id": self.tutee_id, "tutor_id": self.tutor_id, "payment": self.payment, "status": self.status, "subject": self.subject}
 
-# create flask application
-app = Flask(__name__)
-CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/booking'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
 
 # set up for AMQP messaging
 hostname = "localhost" # default host

@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `booking` (
 
 
 INSERT INTO `booking` (`booking_id`, `tutor_id`, `tutee_id`, `subject`, `payment`, `status`) VALUES
-('BK001', 'TUT001', 'TEE001', 'Math', 'Pending' 'Ongoing'),
+('BK001', 'TUT001', 'TEE001', 'Math', 'Pending', 'Ongoing'),
 ('BK002', 'TUT002','TEE002', 'Science', 'Success', 'Ongoing');
 COMMIT;
 
