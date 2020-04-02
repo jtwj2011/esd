@@ -42,9 +42,11 @@ class Tutee(db.Model):
                 "age": self.age, "address": self.address, 
                 "password_hash": self.password_hash}
 
+
 @app.route("/tutee")
 def get_all():
     return jsonify({"tutees": [tutee.json() for tutee in Tutee.query.all()]})
+
 
 @app.route("/tutee/<string:tutee_id>")
 def find_by_tutee_id(tutee_id):
@@ -54,14 +56,13 @@ def find_by_tutee_id(tutee_id):
     return jsonify({"message": "Tutee not found"}), 404
 
 
-
-@app.route("/tutee/profile/<string:tutee_id>", methods=['POST'])
+@app.route("/tutee/<string:tutee_id>", methods=['POST'])
 def create_tutee_profile(tutee_id):
     if (Tutee.query.filter_by(tutee_id=tutee_id).first()):
-        return jsonify({"message": "A tutee with username '{}' already exists.".format(username)}), 400
+        return jsonify({"message": "A tutee with username '{}' already exists.".format(tutee_id)}), 400
 
-    data = request.get_json()
-    tutee = Tutee(tutee_id, **data) # ** means everything else after email
+    data = request.get_json() # this json object should not have tutee_id
+    tutee = Tutee(tutee_id, **data) # add everything in data
 
     try:
         db.session.add(tutee)
@@ -80,7 +81,6 @@ def filter_by_Tutee_subject(subject):
     return jsonify({"message": "Profile not found."}), 404
 
 
-
 @app.route("/tutee/level/<string:level>")
 def filter_by_Tutee_levels(level):
     tutee= Tutee.query.filter_by(level=level).first()
@@ -89,91 +89,57 @@ def filter_by_Tutee_levels(level):
     return jsonify({"message": "Profile not found."}), 404
 
 
-#attritubutes that can be updated:
+# attritubutes that can be updated:
 # email, contact, name, address, subject_rate
-@app.route("/tutee/<string:tutee_id>/<string:contact_number>/<string:password>/<string:fullname>/<string:address>/", methods=['POST'])
-def update_tutee_profile(tutee_id, contact_number, name, address):
-    if (Tutee.query.filter_by(tutee_id=tutee_id).first()):
-        tutee = Tutee.query.filter_by(tutee_id=tutee_id).first()
-        # issue: how do we check if the email is unique inside the database
-        if tutee.tutee_id != tutee_id:
-            try:
-                tutee.tutee_id = tutee_id
-                if (Tutee.query.filter_by(tutee_id=tutee.tutee_id).first()==False):
-                    db.session.commit()
-                else:
-                    return jsonify({"message": "Tutee id already exists."}), 500
-            except:
-                return jsonify({"message": "An error occurred when updating the tutee id."}), 500
+@app.route("/tutee/update/<string:tutee_id>", methods=['POST'])
+def update_tutee_profile(tutee_id):
+    if (not Tutee.query.filter_by(tutee_id=tutee_id).first()):
+        return jsonify({"message": "A tutee with tutee_id '{}' does not exist.".format(tutee_id)}), 400
 
-        if tutee.contact_number != contact_number:
-            try:
-                tutee.contact_number = contact_number
-                db.session.commit()
-            except:
-                return jsonify({"message": "An error occurred when updating the contact number."}), 500
-        
-        if tutee.password != password:
-            try:
-                tutee.password = password
-                db.session.commit()
-            except:
-                return jsonify({"message": "An error occurred when updating the password."}), 500
+    data = request.get_json()
+    tutee = Tutee.query.filter_by(tutee_id=tutee_id).first()
 
-        if tutee.name != name:
-            try:
-                tutee.name = name
-                db.session.commit()
-            except:
-                return jsonify({"message": "An error occurred when updating the name."}), 500
+    for key, value in data.items():
+        try:
+            setattr(tutee, key, value)
+        except:
+            return jsonify({"message": "An error occurred updating '{}'.".format(key)}), 500
+    db.session.commit()
 
-        if tutee.address != address:
-            try:
-                tutee.address = address
-                db.session.commit()
-            except:
-                return jsonify({"message": "An error occurred when updating the address."}), 500
+    return jsonify({"message": "Update successful."}), 201
 
-        return jsonify(tutee.json()), 201
 
-    else:
-        return jsonify({"message": "User does not exist in the system."}), 400
+# @app.route("/tutee/request/<string:tutor_id>/<string:tutee_id>/<string:subject>")
+# def create_request(tutor_id, tutor_contact_number, tutee_id, tutee_contact_number, subject):
+#     """Create a new order according to the order_input"""
+#     status = 200
+#     message = "Success"
 
-@app.route("/tutee/request/<string:tutor_id>/<string:tutee_id>/<string:subject>")
-def create_request(tutor_id, tutor_contact_number, tutee_id, tutee_contact_number, subject):
-    """Create a new order according to the order_input"""
-    # assume status==200 indicates success
-    status = 200
-    message = "Success"
+#     booking_id = 
+#     # Load the order info from a cart (from a file in this case; can use DB too, or receive from HTTP requests)
+#     try:
+#         with open(order_input) as sample_order_file:
+#             cart_order = json.load(sample_order_file)
+#     except:
+#         status = 501
+#         message = "An error occurred in loading the order cart."
+#     finally:
+#         sample_order_file.close()
+#     if status!=200:
+#         print("Failed order creation.")
+#         return {'status': status, 'message': message}
 
-    booking_id = 
-    # Load the order info from a cart (from a file in this case; can use DB too, or receive from HTTP requests)
-    try:
-        with open(order_input) as sample_order_file:
-            cart_order = json.load(sample_order_file)
-    except:
-        status = 501
-        message = "An error occurred in loading the order cart."
-    finally:
-        sample_order_file.close()
-    if status!=200:
-        print("Failed order creation.")
-        return {'status': status, 'message': message}
-
-    # Return the newly created order when creation is succssful
-    if status==200:
-        print("OK order creation.")
-        return order
+#     # Return the newly created order when creation is succssful
+#     if status==200:
+#         print("OK order creation.")
+#         return order
 
 def send_request(request):
     """inform Tutor/Booking Management as needed"""
-    # default username / password to the borker are both 'guest'
-    hostname = "localhost" # default broker hostname. Web management interface default at http://localhost:15672
+    hostname = "localhost"
     port = 5000 # default messaging port.
     # connect to the broker and set up a communication channel in the connection
     connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
-        # Note: various network firewalls, filters, gateways (e.g., SMU VPN on wifi), may hinder the connections;
-        # If "pika.exceptions.AMQPConnectionError" happens, may try again after disconnecting the wifi and/or disabling firewalls
     channel = connection.channel()
 
     # set up the exchange if the exchange doesn't exist
@@ -183,7 +149,6 @@ def send_request(request):
     # prepare the message body content
     message = json.dumps(order, default=str) # convert a JSON object to a string
 
-   
     channel.basic_publish(exchange=exchangename, routing_key="tutor.request", body=message)
        
 
