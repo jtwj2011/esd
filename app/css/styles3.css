@@ -23,14 +23,14 @@ h1 {
   font-weight: 500;
   font-size: 25px;
   text-align: center;
-  color: #fff;
+  color: #29323c;
 }
 
 h2 {
   font-weight: 300;
   margin-bottom: 20px;
   text-align: left;
-  color: #fff;
+  color: #29323c;
 }
 
 h3 {
@@ -159,7 +159,6 @@ th, td {
 
 .column2 {
   width: 8%;
-  
  
   
 }
@@ -311,7 +310,7 @@ input.form-control {
 [ Ver3 ]*/
 
 .table100.ver3 {
-  background-color: #767c76;
+  background-color: #27c234;
 }
 
 .table100.ver3 th {
