@@ -18,3 +18,11 @@ if ($username=='jose@gmail.com' && $password =='asdfgh'){
     
 
 ?>
+<script>
+    var name = document.getElementById("username");
+    var password = document.getElementById("password");
+
+    if name == 'jose@gmail.com' && password=='asdfgh'){
+        header("Location: tutee.html");
+    }
+</script>

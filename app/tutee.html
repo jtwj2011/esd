@@ -14,13 +14,6 @@
     <link href="css/styles3.css" rel="stylesheet">
 
     
-<!--===============================================================================================-->
-	
-    <!--===============================================================================================-->
-        
-    <!--===============================================================================================-->
-    
-    <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/perfect-scrollbar.css">
     <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="css/util.css">
@@ -44,6 +37,8 @@
     crossorigin="anonymous"></script>
     
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
     
 </head>
@@ -66,7 +61,7 @@
                 <img src="image/face.jpeg" class="img-responsive">
             </div>
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name"><?= $userid ?></div>
+                <div class="profile-usertitle-name">Jose</div>
                 <div class="profile-usertitle-status">Online</div>
             </div>
             <div class="clear"></div>
@@ -100,6 +95,7 @@
         <div class="wrap-table100">
         <div class="table100 ver3 m-b-110">
                 <div class="table100-head">
+                    <div class="table100-body js-pscroll">
                     <table id="tutorsTable" >
                         <thead>
                             <tr>
@@ -143,12 +139,12 @@
                             for (const tutor of tutors) {
                                 // console.log(tutor);
                                 eachRow = 
-                                    "<td>" + tutor.name + "</td>" +
+                                    "<td><a href='logout.php'>" + tutor.name + "</td>" +
                                     "<td>" + tutor.gender + "</td>" +
                                     "<td>" + tutor.level + "</td>" +
                                     "<td>" + tutor.subject + "</td>" +
                                     "<td>" + tutor.subject_rate + "</td>" +
-                                    "<td>" + tutor.review + "</td>";
+                                    "<td>"+"<a href='http://localhost:5001/tutor/profile/"+tutor.tutor_id + "'>" + "Button" +  "</a></td>";
                                     
                                 // console.log(eachRow);
                                 rows += "<tr>" + eachRow + "</tr>";
@@ -167,13 +163,41 @@
             // });
         </script>
                     
-                       
+          </div>             
 <div class="limiter">
     <div class="container-table100">
         <div class="wrap-table100">
                    
       
-
+         
+            <div class="container">
+                <h2>Modal Example</h2>
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+              
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                  <div class="modal-dialog">
+                  
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+                
+              </div>
+              
                     </body>
                     </html>
 
@@ -187,7 +211,17 @@
             </div>
         </div>
     </div>
+<button type="button" class="btn btn-primary">Primary</button>
+  
+</style>
+</head>
+
+
 </body>
+</html>
+
+</body>
+
 
 <!--===============================================================================================-->	
 <script src="js/jquery-3.2.1.min.js"></script>
