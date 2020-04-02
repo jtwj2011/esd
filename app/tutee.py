@@ -19,8 +19,8 @@ CORS(app)
 class Tutee(db.Model):
     __tablename__ = 'tutee'
 
-    tutee_id = db.Column(db.String(64), primary_key = True)
-    tutee_contact_number = db.Column(db.String(8), nullable = False)
+    tutee_id = db.Column(db.String(64), primary_key = True) #email
+    contact_number = db.Column(db.String(8), nullable = False)
     name = db.Column(db.String(64), nullable = False)
     gender = db.Column(db.String(1), nullable = False)
     age = db.Column(db.Integer, nullable = False)
