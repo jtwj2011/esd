@@ -66,7 +66,7 @@
                 <img src="image/face.jpeg" class="img-responsive">
             </div>
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name"><?= $userid ?></div>
+                <div class="profile-usertitle-name">Jose</div>
                 <div class="profile-usertitle-status">Online</div>
             </div>
             <div class="clear"></div>
@@ -100,9 +100,11 @@
         <div class="wrap-table100">
         <div class="table100 ver3 m-b-110">
                 <div class="table100-head">
-                    <table id="tutorsTable" >
+                    <div class="table100-body js-pscroll">
+                    <table id="tutorsTable">
+                        
                         <thead>
-                            <tr>
+                            <tr class="row100 head">
                                 <th class="cell100 column2">Name</th>
                                 <th class="cell100 column2">Gender</th>
                                 <th class="cell100 column2">Level</th>
@@ -111,12 +113,16 @@
                                 <th class="cell100 column2">Review</th>
                                 
                             </tr>
+                            
+                            
                         </thead>
+                        
+                            
             </table>
             <br>
             <h3 id="errors"></h3>
         </div>
-    
+        
         <script>
             
     
@@ -143,6 +149,7 @@
                             for (const tutor of tutors) {
                                 // console.log(tutor);
                                 eachRow = 
+                                
                                     "<td>" + tutor.name + "</td>" +
                                     "<td>" + tutor.gender + "</td>" +
                                     "<td>" + tutor.level + "</td>" +
@@ -167,7 +174,7 @@
             // });
         </script>
                     
-                       
+                    </div>
 <div class="limiter">
     <div class="container-table100">
         <div class="wrap-table100">
