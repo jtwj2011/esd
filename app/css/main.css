@@ -97,7 +97,7 @@
     width: 9px;
     background-color: transparent;
     opacity: 1 !important;
-    right: 5px;
+    right: px;
   }
   
   .table100 .ps__rail-y::before {
@@ -172,12 +172,12 @@
   
   th, td {
     font-weight: unset;
-    padding-right: 10px;
+    
   }
   
   .column1 {
     width: 33%;
-    padding-left: 40px;
+    
   }
   
   .column2 {

@@ -114,9 +114,10 @@ h6 {
 }
 
 .container-table100 {
+  text-align: center;
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  background: rgb(104, 37, 37);
 
   display: -webkit-box;
   display: -webkit-flex;
@@ -126,11 +127,11 @@ h6 {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 33px 30px;
+  padding: 20px 20px;
 }
 
 .wrap-table100 {
-  width: 1170px;
+  width: 100px;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -145,13 +146,15 @@ table {
 }
 
 th, td {
-  font-weight: unset;
-  padding-right: 10px;
+  font-weight: 20px;
+  padding-right: 0px;
+  text-align: center;
+  font-size: 20px;
 }
 
 .column1 {
   width: 33%;
-  padding-left: 40px;
+  padding-left:0px;
 }
 
 .column2 {
@@ -175,6 +178,7 @@ th, td {
 .table100-head th {
   padding-top: 18px;
   padding-bottom: 18px;
+  padding-left: 18px;
 }
 
 .table100-body td {
@@ -190,15 +194,16 @@ th, td {
 }
 
 .table100-head {
-  position: absolute;
-  width: 100%;
+  position: auto;
+  width: 50%;
   top: 0;
-  left: 0;
+  right: 0;
 }
 
 .table100-body {
-  max-height: 585px;
+  max-height: 300px;
   overflow: auto;
+  position: auto;
 }
 
 
@@ -261,7 +266,7 @@ input.form-control {
 
 .navbar-custom {
   background: #29323c;
-  height: 60px;
+  height: 70px;
 }
 
 .navbar-header .navbar-brand {
@@ -305,24 +310,24 @@ input.form-control {
 [ Ver3 ]*/
 
 .table100.ver3 {
-  background-color: #393939;
+  background-color: #27c234;
 }
 
 .table100.ver3 th {
   font-family: Lato-Bold;
   font-size: 50px;
-  color: #858d8a;
+  color: #1e0f72;
   line-height: 1.4;
   text-transform: uppercase;
-  background-color: #393939;
+  background-color: #721515;
 }
 
 .table100.ver3 td {
   font-family: Lato-Regular;
   font-size: 50px;
-  color: #808080;
+  color: #7a0909;
   line-height: 1.4;
-  background-color: #222222;
+  background-color: #861d1d;
 }
 .dropdown a.dropdown-toggle {
   color: #fff;
