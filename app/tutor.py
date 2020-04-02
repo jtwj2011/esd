@@ -11,6 +11,32 @@ from flask_cors import CORS
 
 import requests
 
+
+
+
+import json
+import sys
+import os
+import random
+
+# Communication patterns:
+# Use a message-broker with 'topic' exchange to enable interaction
+import pika
+
+hostname = "localhost" # default hostname
+port = 5672 # default port
+# connect to the broker and set up a communication channel in the connection
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
+    # Note: various network firewalls, filters, gateways (e.g., SMU VPN on wifi), may hinder the connections;
+    # If "pika.exceptions.AMQPConnectionError" happens, may try again after disconnecting the wifi and/or disabling firewalls
+channel = connection.channel()
+# set up the exchange if the exchange doesn't exist
+exchangename="tutee_topic"
+channel.exchange_declare(exchange=exchangename, exchange_type='topic')
+
+
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tutor'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@localhost:3306/tutor'
@@ -194,6 +220,9 @@ def filter_by_Tutor_levels(level):
         return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(level=level).all()]})
     return jsonify({"message": "Profile not found."}), 404
 
+
+
+
 def receiveRequest():
     # prepare a queue for receiving messages
     channelqueue = channel.queue_declare(queue="tutor", durable=True) # 'durable' makes the queue survive broker restarts so that the messages in it survive broker restarts too
@@ -207,7 +236,7 @@ def receiveRequest():
     channel.start_consuming() # an implicit loop waiting to receive messages; it doesn't exit by default. Use Ctrl+C in the command window to terminate it.
 
 def callback(channel, method, properties, body): # required signature for the callback; no return
-    print("Received an order by " + file)
+    print("Received an order by " + __file__)
     result = processRequest(json.loads(body))
     # print processing result; not really needed
     json.dump(result, sys.stdout, default=str) # convert the JSON object to a string and print out on screen
@@ -216,24 +245,16 @@ def callback(channel, method, properties, body): # required signature for the ca
 
 def processRequest(request):
     print("Processing a request:")
-    print(request)
+    print(request) 
     # Can do anything here. E.g., publish a message to the error handler when processing fails.
-    resultstatus = bool(random.getrandbits(1)) # simulate success/failure with a random True or False
-    result = {'status': resultstatus, 'message': 'Simulated random s result.', 'order': order}
-    resultmessage = json.dumps(result, default=str) # convert the JSON object to a string
-    if not resultstatus: # inform the error handler when shipping fails
-        print("Failed shipping.")
-        # send the message to the eror handler
-        channel.queue_declare(queue='errorhandler', durable=True) # make sure the queue used by the error handler exist and durable
-        channel.queue_bind(exchange=exchangename, queue='errorhandler', routing_key='*.error') # make sure the queue is bound to the exchange
-        channel.basic_publish(exchange=exchangename, routing_key="shipping.error", body=resultmessage,
-            properties=pika.BasicProperties(delivery_mode = 2) # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange)
-        )
-    else:
-        print("OK shipping.")
+    requeststatus = request.values.get('requeststatus') # supposedly get the status from html webpage
+    result = {'status': requeststatus, 'message': "tutor's response for the request", 'request': request}
     return result
 
-viewrequetsURL = "http:localhost:5002/tutor/<tutor_id>"
+
+
+
+viewrequestsURL = "http:localhost:5002/tutor/<tutor_id>"
 def view_all_requests(tutor_id):
     tutor_id = json.loads(json.dumps(tutor_id, default=str))
     bookings = requests.post(viewrequestsURL, json = tutor_id)
@@ -244,7 +265,7 @@ def filter_by_booking_status(status):
     status = json.loads(json.dumps(status, default=str))
     bookings = requests.post(filterbookingbystatusURL, json = status)
     #display bookings
-    print(booking)
+    print(bookings)
 
 
 #filter by level, subject, price range
@@ -255,3 +276,4 @@ def filter_by_booking_status(status):
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
+    receiveRequest()
