@@ -3,12 +3,10 @@
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-echo"$username";
-echo"$password";
-
+$_SESSION['username'] = $username;
 
 if ($username == 'abc@gmail.com' && $password == 'asdfgh') {
-    header("Location: tutor.html");
+    header("Location: tutor.php");
 }
 
 if ($username=='jose@gmail.com' && $password =='asdfgh'){

@@ -150,7 +150,8 @@ $username=$_POST['username'];
                                     "<td>" + tutor.level + "</td>" +
                                     "<td>" + tutor.subject + "</td>" +
                                     "<td>" + tutor.subject_rate + "</td>" +
-                                    "<td>"+"<a href='http://localhost:5001/tutor/profile/"+tutor.tutor_id + "'>" + "Button" +  "</a></td>";
+                                    "<td>"+"<a href='http://localhost:5000/tutee/request/"+tutor.tutor_id+"/"+tutor.subject+ "'>" + "Button" +  "</a></td>";
+                                
                                     
                                 // console.log(eachRow);
                                 rows += "<tr>" + eachRow + "</tr>";
