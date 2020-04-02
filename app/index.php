@@ -2,7 +2,7 @@
 
 $username = $_POST['username'];
 $password = $_POST['password'];
-$userid = $_SESSION['user'];
+
 echo"$username";
 echo"$password";
 
