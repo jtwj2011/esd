@@ -73,7 +73,15 @@ def receiveRequest():
 def callback(channel, method, properties, body): # required signature for the callback; no return
     print("Received a booking request by " + __file__)
     request = json.loads(body)
-    create_booking(request)
+
+    #JOSE
+    if request[booking_id] in request:
+        if #tutor accepts:
+            accept_booking(request)
+        elif #tutor rejects:
+            reject_booking(request)
+    else:
+      create_booking(request)
     print() # print a new line feed
 
 def create_booking(request):
@@ -88,6 +96,33 @@ def create_booking(request):
         db.session.commit()
     except:
         return jsonify({"message": "An error occurred creating the booking."}), 500
+
+    return jsonify(booking.json()), 201
+
+#JOSE
+def accept_booking(request):
+    # if (Booking.query.filter_by(booking_id=booking_id).first()):
+    #     return jsonify({"message": "A booking with ID '{}' already exists.".format(booking_id)}), 400
+    request["status"] = "Successful"
+    booking = Booking(**request)
+
+    try:
+        db.session.add(booking)
+        db.session.commit()
+    except:
+        return jsonify({"message": "An error occurred accepting the booking."}), 500
+
+    return jsonify(booking.json()), 201
+
+def reject_booking(request):
+    request["status"] = "Unsuccessful"
+    booking = Booking(**request)
+
+    try:
+        db.session.add(booking)
+        db.session.commit()
+    except:
+        return jsonify({"message": "An error occurred rejecting the booking."}), 500
 
     return jsonify(booking.json()), 201
 
