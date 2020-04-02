@@ -109,35 +109,28 @@ def update_tutee_profile(tutee_id):
     return jsonify({"message": "Update successful."}), 201
 
 
-# @app.route("/tutee/request/<string:tutor_id>/<string:tutee_id>/<string:subject>")
-# def create_request(tutor_id, tutor_contact_number, tutee_id, tutee_contact_number, subject):
-#     """Create a new order according to the order_input"""
-#     status = 200
-#     message = "Success"
+@app.route("/tutee/request/<string:tutor_id>/<string:subject>")
+def create_request(tutor_id, subject):
+    """Create a new order according to the order_input"""
+    status = 200
+    message = "Success"
 
-#     booking_id = 
-#     # Load the order info from a cart (from a file in this case; can use DB too, or receive from HTTP requests)
-#     try:
-#         with open(order_input) as sample_order_file:
-#             cart_order = json.load(sample_order_file)
-#     except:
-#         status = 501
-#         message = "An error occurred in loading the order cart."
-#     finally:
-#         sample_order_file.close()
-#     if status!=200:
-#         print("Failed order creation.")
-#         return {'status': status, 'message': message}
+    booking_id = tutor_id + subject
+    json_obj = {"booking_id": booking_id, "tutor_id": tutor_id, "subject": subject}
+    json_dump = json.dumps(json_obj)
+    jsonobject = json.loads(json_dump)
 
-#     # Return the newly created order when creation is succssful
-#     if status==200:
-#         print("OK order creation.")
-#         return order
+    r = send_request(jsonobject)
+    return r
+    # Return the newly created order when creation is succssful
+    # if status==200:
+    #     print("OK order creation.")
+    #     return order
 
 def send_request(request):
     """inform Tutor/Booking Management as needed"""
     hostname = "localhost"
-    port = 5000 # default messaging port.
+    port = 5672 # default messaging port.
     # connect to the broker and set up a communication channel in the connection
     connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
     channel = connection.channel()
@@ -147,7 +140,7 @@ def send_request(request):
     channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
     # prepare the message body content
-    message = json.dumps(order, default=str) # convert a JSON object to a string
+    message = json.dumps(request, default=str) # convert a JSON object to a string
 
     channel.basic_publish(exchange=exchangename, routing_key="tutor.request", body=message)
        
@@ -169,9 +162,9 @@ def send_request(request):
         properties=pika.BasicProperties(delivery_mode = 2, # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange, which are ensured by the previous two api calls)
         )
     )
-    print("Request sent to Tutor.")
     # close the connection to the broker
     connection.close()
+    return "Request sent"
 
 viewbookingsURL = "http://localhost:5002/booking/tutee/<tuteeid>"
 def view_bookings(tutee_id):

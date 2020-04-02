@@ -30,7 +30,7 @@ class Booking(db.Model):
     __tablename__ = 'booking'
 
     booking_id = db.Column(db.String(13), primary_key=True)
-    tutee_id = db.Column(db.String(64), nullable=False)
+    tutee_id = db.Column(db.String(64), nullable=False) 
     tutor_id = db.Column(db.String(64), nullable=False)
     payment = db.Column(db.String(64), nullable=False)
     status = db.Column(db.String(64), nullable=False)
@@ -60,7 +60,7 @@ channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
 def receiveRequest():
     # prepare a queue for receiving messages
-    channelqueue = channel.queue_declare(queue='', exclusive=-True) # '' indicates a random unique queue name; 'exclusive' indicates the queue is used only by this receiver and will be deleted if the receiver disconnects.
+    channelqueue = channel.queue_declare(queue='booking', exclusive=-True) # '' indicates a random unique queue name; 'exclusive' indicates the queue is used only by this receiver and will be deleted if the receiver disconnects.
         # If no need durability of the messages, no need durable queues, and can use such temp random queues.
     queue_name = channelqueue.method.queue
     channel.queue_bind(exchange=exchangename, queue=queue_name, routing_key='#') # bind the queue to the exchange via the key
@@ -186,4 +186,5 @@ def delete_booking(booking_id):
 
 
 if __name__ == '__main__':
+    receiveRequest()
     app.run(port=5002, debug=True)

@@ -101,6 +101,13 @@ def find_by_profile_id(tutor_id):
         return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(tutor_id=tutor_id).all()]})
     return jsonify({"message": "Profile not found."}), 404
 
+@app.route("/tutor/profile/<string:tutor_id>/<subject>")
+def find_by_profile_id_subject(tutor_id, subject):
+    tutor = Tutor.query.filter_by(tutor_id=tutor_id, subject=subject).first()
+    if tutor:
+        return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(tutor_id=tutor_id, subject=subject)]})
+    return jsonify({"message": "Profile not found."}), 404
+
 
 @app.route("/tutor/<string:tutor_id>", methods=['POST'])
 def create_tutor_profile(tutor_id):
