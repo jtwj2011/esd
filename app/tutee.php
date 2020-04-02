@@ -1,3 +1,9 @@
+<?php
+$username=$_POST['username'];
+
+?>
+<html>
+
 <head>
    
     
@@ -61,7 +67,7 @@
                 <img src="image/face.jpeg" class="img-responsive">
             </div>
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name">Jose</div>
+                <div class="profile-usertitle-name"><?= $username ?></div>
                 <div class="profile-usertitle-status">Online</div>
             </div>
             <div class="clear"></div>
