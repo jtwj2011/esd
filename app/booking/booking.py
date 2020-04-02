@@ -74,11 +74,12 @@ def callback(channel, method, properties, body): # required signature for the ca
     print("Received a booking request by " + __file__)
     request = json.loads(body)
 
+    booking_id = request["booking_id"]
     #JOSE
-    if request[booking_id] in request:
-        if #tutor accepts:
+    if Booking.query.filter_by(booking_id=booking_id).first():
+        if request["status"] == "accept":
             accept_booking(request)
-        elif #tutor rejects:
+        elif request["status"] == "reject":
             reject_booking(request)
     else:
       create_booking(request)
@@ -99,32 +100,33 @@ def create_booking(request):
 
     return jsonify(booking.json()), 201
 
-#JOSE
-def accept_booking(request):
-    # if (Booking.query.filter_by(booking_id=booking_id).first()):
-    #     return jsonify({"message": "A booking with ID '{}' already exists.".format(booking_id)}), 400
-    request["status"] = "Successful"
-    booking = Booking(**request)
+def accept_booking(booking_id):
+    if not (Booking.query.filter_by(booking_id=booking_id).first()):
+        return jsonify({"message": "A booking with ID '{}' is not found.".format(booking_id)}), 400  
+
+    update = Booking.query.filter_by(booking_id=booking_id).first()
 
     try:
-        db.session.add(booking)
+        update.status = 'Accepted'
         db.session.commit()
     except:
-        return jsonify({"message": "An error occurred accepting the booking."}), 500
+        return jsonify({"message": "An error occurred updating the booking status."}), 500
 
-    return jsonify(booking.json()), 201
+    return jsonify({"message": "Your booking has been accepted."}), 201
 
-def reject_booking(request):
-    request["status"] = "Unsuccessful"
-    booking = Booking(**request)
+def reject_booking(booking_id):
+    if not (Booking.query.filter_by(booking_id=booking_id).first()):
+        return jsonify({"message": "A booking with ID '{}' is not found.".format(booking_id)}), 400  
+
+    update = Booking.query.filter_by(booking_id=booking_id).first()
 
     try:
-        db.session.add(booking)
+        update.status = 'Rejected'
         db.session.commit()
     except:
-        return jsonify({"message": "An error occurred rejecting the booking."}), 500
+        return jsonify({"message": "An error occurred updating the booking status."}), 500
 
-    return jsonify(booking.json()), 201
+    return jsonify({"message": "Your booking has been rejected."}), 201
 
 #used for HTTP invocations
 @app.route("/booking")
@@ -167,22 +169,6 @@ def find_by_booking_id(booking_id):
     return jsonify({"message": "Booking ID not found."}), 404
 
 
-# @app.route("/booking/create/<string:booking_id>", methods=['POST'])
-# def create_booking(booking_id):
-#     if (Booking.query.filter_by(booking_id=booking_id).first()):
-#         return jsonify({"message": "A booking with ID '{}' already exists.".format(booking_id)}), 400
-
-#     data = request.get_json()
-#     booking = Booking(booking_id, **data)
-
-#     try:
-#         db.session.add(booking)
-#         db.session.commit()
-#     except:
-#         return jsonify({"message": "An error occurred creating the booking."}), 500
-
-#     return jsonify(booking.json()), 201
-
 @app.route("/booking/delete/<string:booking_id>", methods=['DELETE'])
 def delete_booking(booking_id):
     if not (Booking.query.filter_by(booking_id=booking_id).first()):
@@ -198,39 +184,6 @@ def delete_booking(booking_id):
 
     return jsonify({"message": "Your booking has been successfully deleted"}), 201
 
-# @app.route("/booking/filter/location/<string:location>")
-# def filter_by_location(location):
-@app.route("/booking/accept/<string:booking_id>", methods=['PUT'])
-def accept_booking(booking_id):
-    if not (Booking.query.filter_by(booking_id=booking_id).first()):
-        return jsonify({"message": "A booking with ID '{}' is not found.".format(booking_id)}), 400  
-
-    update = Booking.query.filter_by(booking_id=booking_id).first()
-
-    try:
-        update.status = 'Accepted'
-        db.session.commit()
-    except:
-        return jsonify({"message": "An error occurred updating the booking status."}), 500
-
-    return jsonify({"message": "Your booking has been accepted."}), 201
-
-@app.route("/booking/reject/<string:booking_id>", methods=['PUT'])
-def reject_booking(booking_id):
-    if not (Booking.query.filter_by(booking_id=booking_id).first()):
-        return jsonify({"message": "A booking with ID '{}' is not found.".format(booking_id)}), 400  
-
-    update = Booking.query.filter_by(booking_id=booking_id).first()
-
-    try:
-        update.status = 'Rejected'
-        db.session.commit()
-    except:
-        return jsonify({"message": "An error occurred updating the booking status."}), 500
-
-    return jsonify({"message": "Your booking has been rejected."}), 201
-
 
 if __name__ == '__main__':
     app.run(port=5002, debug=True)
-    
