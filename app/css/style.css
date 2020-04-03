@@ -162,7 +162,7 @@ h3 {
 }
 
 .w3layouts-main {
-    background-image: url('../image/Teaching.jpg');
+    background-image: url('../img/bg-img/bg1.jpg');
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -291,7 +291,7 @@ a {
 }
 
 .header-left-bottom button.btn:hover {
-    background: #29323c;
+    background: #b4b9bef6;
     color: white;
 }
 

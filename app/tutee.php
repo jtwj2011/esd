@@ -15,8 +15,8 @@ $username=$_POST['username'];
     
 
     <!-----CSS CODE LINKS-->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min1.css" rel="stylesheet">
+    <link href="css/font-awesome.min1.css" rel="stylesheet">
     <link href="css/styles3.css" rel="stylesheet">
 
     
