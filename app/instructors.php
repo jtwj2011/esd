@@ -22,6 +22,16 @@ $username='Jose';
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script 
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -256,58 +266,48 @@ $username='Jose';
     </section>
     <!-- ##### Best Tutors Area End ##### -->
 
-  <!---FORM--->
-  <div class="container">
-  <div class="section-heading">
-  <div id="booking" class="section">
-            <div class="section-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="booking-form">
-                            <div class="form-header">
-                                <h1>Book A Tutor</h1>
-                            </div>
+    <div id="main-container" class="container">
+        <h1 class="display-4">Request Tutor</h1>
+        <form id="form">
+            Name<br>
+            <input type = "text" id = "name"><br>
+            Subject<br>
+            <input type = "text" id = "subject"><br>
+            <br>
+            <button type = "submit" id="submitBtn" class="btn btn-primary">Submit</button>
+        </form>
+        <br>
+        <h3 id="errors"></h3>
+    </div>
 
-                            <!-- action = "http://localhost:5000/tutee/request" -->
+    <script>
+        $("#form").submit(async (event) => {   
+            event.preventDefault(); 
 
-                            <form id ="form" action="http://localhost:5000/tutee/request/jose/jose1/maths" method="POST">
-                                <div class="form-header h2",>
-                                    <span class="form-header h2", id="carparkName", style="color:#ffd75e;"></span>
-                                </div>
+            var name = $("#name").val();
+            var subject = $("#subject").val();
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <span class="form-label"><h3>Tutor ID<h3></span>
-                                            <input name="tutor_id" id="tutor_id" class="form-control" type="text" placeholder="Enter the Tutor ID" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <span class="form-label"><h3>Subject</span></h3>
-                                            <input name="subject" id="subject" class="form-control" type="text" placeholder="Enter the Subject" required>
-                                        </div>
-                                    </div>
-                                        
-                                </div>
+            var addbook = {tutor_id: name, 
+                            subject: subject};
 
-                                <div class="form-btn">
-                                <input id="submitForm"class="submit-btn" type="submit" value="Make a Booking">
-                                    <!-- <input class="submit-btn" type="submit" value="Book now">-->
-                                    <!-- <input class="submit-btn" type="submit" value="Book now">-->
-                                </div> 
-                                <input type="hidden" value ="<?=$username?>" name="tutee_id" id="tutee_id">
-                            </form>
-                            <div id="main-container" class="container"> </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-                            </div>
-                            </div>
-<br><br><br>
+            console.log(addbook);
+
+            var serviceURL = "http://127.0.0.1:5000/tutee/request";
+
+            const response =
+                await fetch(
+                    serviceURL, { 
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            "Content-Type": "application/json"
+                        },
+                        mode: 'cors',
+                        body: JSON.stringify(addbook)
+                        });
+            const book = await response.json();
+        });
+    </script>
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">

@@ -32,7 +32,7 @@ USE `booking`;
 
 DROP TABLE IF EXISTS `booking`;
 CREATE TABLE IF NOT EXISTS `booking` (
-  `booking_id` varchar(20) NOT NULL,
+  `booking_id` varchar(200) NOT NULL,
   `tutor_id` varchar(20) NOT NULL,
   `tutee_id` varchar(20) NOT NULL,
   `subject` varchar(20) NOT NULL,

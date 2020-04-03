@@ -109,14 +109,18 @@ def update_tutee_profile(tutee_id):
     return jsonify({"message": "Update successful."}), 201
 
 
-@app.route("/tutee/request/<string:tutor_id>/<string:subject>")
-def create_request(tutor_id, subject):
+@app.route("/tutee/request", methods = ['POST'])
+def create_request():
     """Create a new order according to the order_input"""
     status = 200
     message = "Success"
     tutee_id = "harcodetuteename"
 
-    booking_id = tutor_id + subject
+    data = request.get_json()
+    tutor_id = data["tutor_id"]
+    subject = data["subject"]
+
+    booking_id = tutor_id + subject + tutee_id
     json_obj = {"booking_id": booking_id, "tutor_id": tutor_id, "subject": subject, "tutee_id": tutee_id}
     json_dump = json.dumps(json_obj)
     jsonobject = json.loads(json_dump)

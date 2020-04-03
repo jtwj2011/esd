@@ -101,7 +101,8 @@ def create_booking(request):
         db.session.add(booking)
         db.session.commit()
     except:
-        return jsonify({"message": "An error occurred creating the booking."}), 500
+        # return jsonify({"message": "An error occurred creating the booking."}), 500
+        return "An error occurred creating the booking."
 
     return "Request successfully created and added to Booking table"
     # return jsonify(booking.json()), 201
