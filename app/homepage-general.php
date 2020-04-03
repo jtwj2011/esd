@@ -169,15 +169,17 @@
     </section>
 
     <!-- ##### Footer Area Start ##### -->
+    <html>
     <footer class="footer-area">
         <!-- Top Footer Area -->
         <div class="top-footer-area">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
+                       
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><b>Tutor Labs</a></b>
                         </div>
                         
                         
@@ -190,8 +192,8 @@
         <div class="bottom-footer-area d-flex justify-content-between align-items-center">
             <!-- Contact Info -->
             <div class="contact-info">
-                <a href="#"><span>Phone:</span> +44 300 303 0266</a>
-                <a href="#"><span>Email:</span> info@clever.com</a>
+                <a href="#"><span>Phone:</span> +65 6405 1202</a>
+                <a href="#"><span>Email:</span> info@Tutor_Labs.com</a>
             </div>
             <!-- Follow Us -->
             <div class="follow-us">
