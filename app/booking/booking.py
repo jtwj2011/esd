@@ -59,8 +59,9 @@ exchangename="tutee_topic"
 channel.exchange_declare(exchange=exchangename, exchange_type='topic')
 
 def receiveRequest():
+    print ("receiving requests...")
     # prepare a queue for receiving messages
-    channelqueue = channel.queue_declare(queue='booking', exclusive=-True) # '' indicates a random unique queue name; 'exclusive' indicates the queue is used only by this receiver and will be deleted if the receiver disconnects.
+    channelqueue = channel.queue_declare(queue='', exclusive = True) # '' indicates a random unique queue name; 'exclusive' indicates the queue is used only by this receiver and will be deleted if the receiver disconnects.
         # If no need durability of the messages, no need durable queues, and can use such temp random queues.
     queue_name = channelqueue.method.queue
     channel.queue_bind(exchange=exchangename, queue=queue_name, routing_key='#') # bind the queue to the exchange via the key
@@ -73,16 +74,20 @@ def receiveRequest():
 def callback(channel, method, properties, body): # required signature for the callback; no return
     print("Received a booking request by " + __file__)
     request = json.loads(body)
+    print (request)
 
     booking_id = request["booking_id"]
     #JOSE
     if Booking.query.filter_by(booking_id=booking_id).first():
-        if request["status"] == "accept":
-            accept_booking(request)
-        elif request["status"] == "reject":
-            reject_booking(request)
+        if "status" in request:
+            if request["status"] == "accept":
+                accept_booking(request)
+            elif request["status"] == "reject":
+                reject_booking(request)
+        else:
+            print ("Request is already sent before. Status is pending now.")
     else:
-      create_booking(request)
+        print (create_booking(request))
     print() # print a new line feed
 
 def create_booking(request):
@@ -98,7 +103,9 @@ def create_booking(request):
     except:
         return jsonify({"message": "An error occurred creating the booking."}), 500
 
-    return jsonify(booking.json()), 201
+    return "Request successfully created and added to Booking table"
+    # return jsonify(booking.json()), 201
+    # return ""
 
 def accept_booking(booking_id):
     if not (Booking.query.filter_by(booking_id=booking_id).first()):
@@ -186,5 +193,5 @@ def delete_booking(booking_id):
 
 
 if __name__ == '__main__':
+    print("This is " + os.path.basename(__file__) + ": waiting for requests...")
     receiveRequest()
-    app.run(port=5002, debug=True)

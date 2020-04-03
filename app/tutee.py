@@ -114,9 +114,10 @@ def create_request(tutor_id, subject):
     """Create a new order according to the order_input"""
     status = 200
     message = "Success"
+    tutee_id = "harcodetuteename"
 
     booking_id = tutor_id + subject
-    json_obj = {"booking_id": booking_id, "tutor_id": tutor_id, "subject": subject}
+    json_obj = {"booking_id": booking_id, "tutor_id": tutor_id, "subject": subject, "tutee_id": tutee_id}
     json_dump = json.dumps(json_obj)
     jsonobject = json.loads(json_dump)
 
@@ -142,29 +143,16 @@ def send_request(request):
     # prepare the message body content
     message = json.dumps(request, default=str) # convert a JSON object to a string
 
-    channel.basic_publish(exchange=exchangename, routing_key="tutor.request", body=message)
-       
+    channel.queue_declare(queue='booking', durable=True)
+    channel.queue_bind(exchange=exchangename, queue='booking', routing_key='#')
 
-##start here
-    # if "failure" in payment: # if some error happened in order creation
-    #     # inform Error handler
-    #     channel.queue_declare(queue='errorhandler', durable=True) # make sure the queue used by the error handler exist and durable
-    #     channel.queue_bind(exchange=exchangename, queue='errorhandler', routing_key='*.error') # make sure the queue is bound to the exchange
-    #     channel.basic_publish(exchange=exchangename, routing_key="shipping.error", body=message,
-    #         properties=pika.BasicProperties(delivery_mode = 2) # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange)
-    #     )
-    #     print("Order status ({:d}) sent to error handler.".format(order["status"]))
-    # inform Shipping and exit
-        # prepare the channel and send a message to Shipping
-    channel.queue_declare(queue='tutor', durable=True) # make sure the queue used by Shipping exist and durable
-    channel.queue_bind(exchange=exchangename, queue='tutor', routing_key='*.request') # make sure the queue is bound to the exchange
     channel.basic_publish(exchange=exchangename, routing_key="tutor.request", body=message,
-        properties=pika.BasicProperties(delivery_mode = 2, # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange, which are ensured by the previous two api calls)
+        properties=pika.BasicProperties(delivery_mode = 2) # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange)
         )
-    )
-    # close the connection to the broker
+       
+    print("Order sent to booking.")
     connection.close()
-    return "Request sent"
+    return ""
 
 viewbookingsURL = "http://localhost:5002/booking/tutee/<tuteeid>"
 def view_bookings(tutee_id):
@@ -173,7 +161,7 @@ def view_bookings(tutee_id):
     #display bookings
     print(bookings)
 
-viewsepcificbookingURL = "http://localhost:5002/booking/<booking_id>"
+viewspecificbookingURL = "http://localhost:5002/booking/<booking_id>"
 def view_particular_booking(booking_id):
     booking_id = json.loads(json.dumps(booking_id, default=str))
     booking = requests.post(viewspecificbookingURL, json = booking_id)
