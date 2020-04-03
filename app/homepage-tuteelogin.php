@@ -96,7 +96,7 @@
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
                                             <a class="dropdown-item" href="#">Profile</a>
                                             <a class="dropdown-item" href="#">Account Info</a>
-                                            <a class="dropdown-item" href="#">Tutee Requests</a>
+                                            <a class="dropdown-item" href="#">Confirmed Requests</a>
                                             <a class="dropdown-item" href="homepage.html">Logout</a>
                                         </div>
                                     </div>

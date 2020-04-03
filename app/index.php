@@ -3,24 +3,15 @@
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$_SESSION['username'] = $username;
 
-if ($username == 'abc@gmail.com' && $password == 'asdfgh') {
-    header("Location: tutor.php");
+
+if ($username == 'Jose@gmail.com' && $password == 'asdfgh') {
+    header("Location: homepage-tuteelogin.php");
 }
 
-if ($username=='jose@gmail.com' && $password =='asdfgh'){
-    header("Location: tutee.html");
+if ($username=='Christopher@gmail.com' && $password =='asdfgh'){
+    header("Location: homepage-tutorlogin.php");
        
 }
     
 
-?>
-<script>
-    var name = document.getElementById("username");
-    var password = document.getElementById("password");
-
-    if name == 'jose@gmail.com' && password=='asdfgh'){
-        header("Location: tutee.html");
-    }
-</script>

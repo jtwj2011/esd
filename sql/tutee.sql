@@ -47,12 +47,11 @@ CREATE TABLE IF NOT EXISTS `tutee`(
 
 
 INSERT INTO `tutee` (`tutee_id`, `contact_number`, `name`, `gender`, `age`, `address`, `password_hash`) VALUES
-('abc@gmail.com', '12345678', 'amy','F', 17, 'Blk 109 Stamford Drive', 'asdfgh'),
-('abdgef@gmail.com', '12345678', 'jamy','F', 19, 'Blk 150 Real Stamford Drive', 'asdfgh'),
-('james@gmail.com', '12345678', 'James','M', 17, '111 Tamford Drive', 'asdfgh'),
-('pam@gmail.com', '12345678', 'pam','F', 20, 'Blk 220 Bukit Drive', 'asdfgh'),
-('Saran@gmail.com', '12345678', 'saran','M', 15, 'Goldhill Avenue', 'asdfgh'),
-('Jose@gmail.com', '12345678', 'jose','M', 18, 'Blk 226 Stamford Drive', 'asdfgh');
+('George@gmail.com', '89273749', 'amy','F', 17, 'Blk 109 Stamford Drive', 'asdfgh'),
+('Francis@gmail.com', '92018818', 'jamy','F', 19, 'Blk 150 Real Stamford Drive', 'asdfgh'),
+('Jose@gmail.com', '92028828', 'James','M', 17, '111 Tamford Drive', 'asdfgh'),
+('Pam@gmail.com', '82726373', 'pam','F', 20, 'Blk 220 Bukit Drive', 'asdfgh'),
+('Saran@gmail.com', '92001929', 'saran','M', 15, 'Goldhill Avenue', 'asdfgh');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
