@@ -269,8 +269,8 @@ $username='Jose';
     <div id="main-container" class="container">
         <h1 class="display-4">Request Tutor</h1>
         <form id="form">
-            Name<br>
-            <input type = "text" id = "name"><br>
+            Tutor ID<br>
+            <input type = "text" id = "tutor_id"><br>
             Subject<br>
             <input type = "text" id = "subject"><br>
             <br>
@@ -281,31 +281,44 @@ $username='Jose';
     </div>
 
     <script>
+        function showError(message) {
+
+        $('#errors')
+            .text(message);
+        }
+
         $("#form").submit(async (event) => {   
             event.preventDefault(); 
 
-            var name = $("#name").val();
+            var tutor_id = $("#tutor_id").val();
             var subject = $("#subject").val();
 
-            var addbook = {tutor_id: name, 
-                            subject: subject};
-
-            console.log(addbook);
+            var addrequest = {tutor_id: tutor_id, 
+                        subject: subject};
 
             var serviceURL = "http://127.0.0.1:5000/tutee/request";
 
-            const response =
-                await fetch(
-                    serviceURL, { 
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            "Content-Type": "application/json"
-                        },
-                        mode: 'cors',
-                        body: JSON.stringify(addbook)
-                        });
-            const book = await response.json();
+            try {
+                const response =
+                    await fetch(
+                        serviceURL, { 
+                            method: 'POST',
+                            headers: {"Content-Type": "application/json"},
+                            mode: 'cors',
+                            body: JSON.stringify(addrequest)
+                            });
+
+                const request = await response.json();
+    
+                if (request.message) {
+                    showError(request.message);
+                } else {
+                    showError("Your request has been sent!");
+                }
+            } catch (error) {
+                showError
+                ('There is a problem retrieving the tutor data, please try again later.<br />' + error);
+            }
         });
     </script>
 
