@@ -1811,6 +1811,10 @@ textarea:focus {
           .contact--info .contact-list li h6 i {
             margin-right: 5px; } }
 
+.form {
+  position: center;
+}
+
 .contact-form {
   position: relative;
   z-index: 1;
@@ -1870,6 +1874,10 @@ textarea:focus {
     .page-content p:last-of-type {
       margin-bottom: 0; }
 
+
+
+
+
 /* :: 15.0 Footer Area */
 .top-footer-area {
   position: relative;
@@ -1880,6 +1888,8 @@ textarea:focus {
   border-bottom: 1px solid #4c4c4c; }
   .top-footer-area .footer-logo {
     display: block;
+    size: 20px;
+    color:white;
     margin-bottom: 15px; }
   .top-footer-area p {
     margin-bottom: 0;

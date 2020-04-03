@@ -181,7 +181,7 @@ $tutee_id = $_SESSION['login_id'];
                                 <p>Subject Rate: $50/h</p>
                                 <p>Level: Primary</p>
                                 <span>
-                                <p>Christopher is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
+                                <p>Christopher is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutees and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -204,7 +204,7 @@ $tutee_id = $_SESSION['login_id'];
                                 <p>Subject Rate: $50/h</p>
                                 <p>Level: Primary</p>
                                 <span>
-                                <p>Hong Seng is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
+                                <p>Hong Seng is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutees and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -227,7 +227,7 @@ $tutee_id = $_SESSION['login_id'];
                                 <p>Subject Rate: $35/h</p>
                                 <p>Level: Secondary</p>
                                 <span>
-                                <p>Yan Sheng is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
+                                <p>Yan Sheng is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutees and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -250,7 +250,7 @@ $tutee_id = $_SESSION['login_id'];
                                 <p>Subject Rate: $35/h</p>
                                 <p>Level: Pre-School</p>
                                 <span>
-                                <p>Saranpal is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
+                                <p>Saranpal is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutees and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -273,7 +273,7 @@ $tutee_id = $_SESSION['login_id'];
                                 <p>Subject Rate: $35/h</p>
                                 <p>Level: Secondary</p>
                                 <span>
-                                <p>Yifan is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
+                                <p>Yifan is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutees and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -295,7 +295,29 @@ $tutee_id = $_SESSION['login_id'];
                                 <p>Subject Rate: $30/h</p>
                                 <p>Level: Pre-School</p>
                                 <span>
-                                <p>Maurice is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
+                                <p>Maurice is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutees and checks their understanding before moving on. Highly recommended.</p>
+                                <div class="social-info">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Single Tutors Slide -->
+                         <div class="single-tutors-slides">
+                            <!-- Tutor Thumbnail -->
+                            <div class="tutor-thumbnail">
+                                <img src="img/bg-img/J.jpg" alt="">
+                            </div>
+                            <!-- Tutor Information -->
+                            <div class="tutor-information text-center">
+                            <h5>Maurice</h5>
+                                <span>Senior Tutor</span>
+                                <p>Subject: Chemistry</p>
+                                <p>Subject Rate: $30/h</p>
+                                <p>Level: Primary</p>
+                                <span>
+                                <p>Jose is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutees and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -313,16 +335,17 @@ $tutee_id = $_SESSION['login_id'];
 
     <!-- ##### Form Start ##### -->
     <div id="main-container" class="container">
-        <h1 class="display-4">Request Tutor</h1>
+    <div class="section-heading">
+        <h2 class="display-4"><b><h1>Request A Tutor</h1></b><br>
         <form id="form">
-            Tutor ID<br>
-            <input type = "text" id = "tutor_id"><br>
-            Subject<br>
+            <div class="form"><h2>Tutor ID</h2>
+            <input type = "text" id = "tutor_id">
+            <h2>Subject</h2>
             <input type = "text" id = "subject"><br>
             <br>
-            <button type = "submit" id="submitBtn" class="btn btn-primary">Submit</button>
+            <button type = "submit" id="submitBtn" class="btn btn-primary">Send Request</button>
         </form>
-        <br>
+</div>
         <h3 id="errors"></h3>
     </div>
 
@@ -371,6 +394,7 @@ $tutee_id = $_SESSION['login_id'];
             }
         });
     </script>
+    </div>
     <!-- ##### Form End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
@@ -382,7 +406,7 @@ $tutee_id = $_SESSION['login_id'];
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html">Tutor Labs</a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
