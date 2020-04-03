@@ -114,23 +114,17 @@ def create_request():
     """Create a new order according to the order_input"""
     status = 200
     message = "Success"
-    tutee_id = "harcodetuteename"
 
     data = request.get_json()
+    tutee_id = data["tutee_id"]
     tutor_id = data["tutor_id"]
     subject = data["subject"]
 
     booking_id = tutor_id + subject + tutee_id
     json_obj = {"booking_id": booking_id, "tutor_id": tutor_id, "subject": subject, "tutee_id": tutee_id}
-    json_dump = json.dumps(json_obj)
-    jsonobject = json.loads(json_dump)
 
-    r = send_request(jsonobject)
-    return r
-    # Return the newly created order when creation is succssful
-    # if status==200:
-    #     print("OK order creation.")
-    #     return order
+    return send_request(json_obj)
+
 
 def send_request(request):
     """inform Tutor/Booking Management as needed"""
@@ -154,9 +148,9 @@ def send_request(request):
         properties=pika.BasicProperties(delivery_mode = 2) # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange)
         )
        
-    print("Order sent to booking.")
+    print("Order sent to Booking service.")
     connection.close()
-    return ""
+    return jsonify(request), 201
 
 viewbookingsURL = "http://localhost:5002/booking/tutee/<tuteeid>"
 def view_bookings(tutee_id):
@@ -181,5 +175,5 @@ def filter_by_booking_status(status):
 
 if __name__ == '__main__':
     app.run(port = 5000, debug = True)
-    request = create_request()
-    send_request(request)
+    # request = create_request()
+    # send_request(request)

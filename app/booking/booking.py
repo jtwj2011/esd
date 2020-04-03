@@ -143,16 +143,16 @@ def get_all():
 
 @app.route("/booking/tutee/<string:tutee_id>")
 def get_all_bookings_for_tutee(tutee_id):
-    tuteeid = Booking.query.filter_by(tutee_id=tutee_id).first()
-    if tuteeid:
-        return jsonify(tuteeid.json())
-    return jsonify({"message": "Tutee ID not found"}), 404
+    bookings = Booking.query.filter_by(tutee_id=tutee_id).all()
+    if bookings:
+        return jsonify({"Bookings": [booking.json() for booking in Booking.query.filter_by(tutee_id=tutee_id).all()]}), 200
+    return jsonify({"message": "Tutor ID not found"}), 404
 
 @app.route("/booking/tutor/<string:tutor_id>")
 def get_all_bookings_for_tutor(tutor_id):
-    tutorid = Booking.query.filter_by(tutor_id=tutor_id).first()
-    if tutorid:
-        return jsonify(tutorid.json()), 200
+    bookings = Booking.query.filter_by(tutor_id=tutor_id).all()
+    if bookings:
+        return jsonify({"Bookings": [booking.json() for booking in Booking.query.filter_by(tutor_id=tutor_id).all()]}), 200
     return jsonify({"message": "Tutor ID not found"}), 404
 
 @app.route("/booking/status/<string:status>/tutor/<tutor_id>")
@@ -195,4 +195,5 @@ def delete_booking(booking_id):
 
 if __name__ == '__main__':
     print("This is " + os.path.basename(__file__) + ": waiting for requests...")
-    receiveRequest()
+    #receiveRequest()
+    app.run(port = 5002, debug = True)

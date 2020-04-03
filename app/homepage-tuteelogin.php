@@ -1,4 +1,10 @@
+<?php
 
+session_start();
+$tutee_id = $_SESSION['login_id'];
+// echo $tutee_id;
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
