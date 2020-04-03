@@ -17,6 +17,16 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script 
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -129,12 +139,12 @@
     </section>
     <!-- ##### Request Table##### -->
     </style>
-</head>
+</body>
 
 <body>
     <div id="main-container" class="container">
         <h1 class="display-4">Tutee Requests</h1>
-        <table id="tutorsTable" class='table table-striped' border='1'>
+        <table id="bookingsTable" class='table table-striped' border='1'>
             <thead class='thead-dark'>
                 <tr>
                     <th>Booking ID</th>
@@ -159,9 +169,8 @@
         <br>
         <h3 id="errors"></h3>
     </div>
-
+    <html>
     <script>
-        
 
             $(async() => {           
                 var serviceURL = "http://127.0.0.1:5002/booking/tutor/Christopher";
@@ -172,34 +181,29 @@
                     serviceURL, { method: 'GET' }
                     );
                     const data = await response.json();
-                    var tutors = data.Tutor;
-                    console.log(tutors);
+                    var bookings = data.Bookings;
+                    console.log(bookings);
                     // console.log(!tutors);
                     // console.log(tutors.length);
 
         
-                    if (!tutors || !tutors.length) {
-                        showError('No tutors.')
+                    if (!bookings || !bookings.length) {
+                        showError('No Bookings.')
                     } else {
                         var rows = "";
                         // console.log(tutors);
-                        for (const tutor of tutors) {
+                        for (const booking of bookings) {
                             // console.log(tutor);
                             eachRow = 
-                                "<td>" + tutor.name + "</td>" +
-                                "<td>" + tutor.gender + "</td>" +
-                                "<td>" + tutor.location + "</td>" +
-                                "<td>" + tutor.level + "</td>" +
-                                "<td>" + tutor.subject + "</td>" +
-                                "<td>" + tutor.subject_rate + "</td>" +
-                                "<td>" + tutor.contact_number + "</td>" +
-                                "<td>" + tutor.review + "</td>";
+                                "<td>" + booking.booking_id + "</td>" +
+                                "<td>" + booking.tutee_id + "</td>" +
+                                "<td>" + booking.subject + "</td>";
                             // console.log(eachRow);
                             rows += "<tr>" + eachRow + "</tr>";
                             console.log(rows);
                         }
                         // console.log(book);
-                        $('#tutorsTable').append(rows);
+                        $('#bookingsTable').append(rows);
                     }
                 } catch (error) {
                 // Errors when calling the service; such as network error, 
@@ -210,7 +214,7 @@
             });
         // });
     </script>
- 
+ </html>
 <hr>
     <!-- ##### Cool Facts Area Start ##### -->
     <section class="cool-facts-area section-padding-100-0">
