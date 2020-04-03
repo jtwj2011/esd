@@ -1,3 +1,9 @@
+<?php
+$username=$_POST['username'];
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,7 +79,7 @@
                                 
                                 </li>
                                 <li><a href="courses.html">Subjects</a></li>
-                                <li><a href="instructors.html">Instructors</a></li>
+                                <li><a href="instructors.php">Instructors</a></li>
                                 
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
@@ -87,9 +93,20 @@
                             </div>
 
                             <!-- Register / Login -->
-                            <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
-                                <a href="login.html" class="btn active">Login</a>
+                            <div class="login-state d-flex align-items-center">
+                                <div class="user-name mr-30">
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $username?></a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
+                                            <a class="dropdown-item" href="#">Profile</a>
+                                            <a class="dropdown-item" href="#">Account Info</a>
+                                            <a class="dropdown-item" href="homepage.html">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="userthumb">
+                                    <img src="img/bg-img/t1.png" alt="">
+                                </div>
                             </div>
 
                         </div>
@@ -108,8 +125,8 @@
                 <div class="col-12">
                     <!-- Hero Content -->
                     <div class="hero-content text-center">
-                        <h2>Knowledge is the Greatest Power in the World</h2>
-                        <a href="#" class="btn clever-btn">Find Tutors</a>
+                        <h2>Learning Made Simple</h2>
+                        <a href="instructors.php" class="btn clever-btn">Find Tutors</a>
                     </div>
                 </div>
             </div>

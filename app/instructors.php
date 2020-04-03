@@ -1,7 +1,4 @@
-<?php
-$username=$_POST['username'];
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +29,14 @@ $username=$_POST['username'];
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
+        
 
         <!-- Top Header Area -->
         <div class="top-header-area d-flex justify-content-between align-items-center">
             <!-- Contact Info -->
             <div class="contact-info">
-                <a href="#"><span>Phone:</span> +44 300 303 0266</a>
-                <a href="#"><span>Email:</span> info@clever.com</a>
+                <a href="#"><span>Phone:</span> +65 6405 1202</a>
+                <a href="#"><span>Email:</span> info@Tutor_Labs.com</a>
             </div>
             <!-- Follow Us -->
             <div class="follow-us">
@@ -56,7 +54,7 @@ $username=$_POST['username'];
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="index.html"><b>Tutor Labs</a></b>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -75,17 +73,7 @@ $username=$_POST['username'];
                         <div class="classynav">
                             <ul>
                                 <li><a href="index.html">Home</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="single-course.html">Single Courses</a></li>
-                                        <li><a href="instructors.html">Instructors</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Single Blog</a></li>
-                                        <li><a href="regular-page.html">Regular Page</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
+                                
                                 </li>
                                 <li><a href="courses.html">Courses</a></li>
                                 <li><a href="instructors.html">Instructors</a></li>
@@ -123,7 +111,7 @@ $username=$_POST['username'];
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Courses</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Art &amp; Design</li>
+                
             </ol>
         </nav>
     </div>
@@ -131,7 +119,7 @@ $username=$_POST['username'];
 
     <!-- ##### Instructors Video Start ##### -->
     <div class="instructors-video d-flex align-items-center justify-content-center bg-img" style="background-image: url(img/bg-img/bg4.jpg);">
-        <h2>Be The Best Teacher</h2>
+        <h2>Learning is a Journey</h2>
         <!-- video btn -->
         <a href="https://www.youtube.com/watch?v=qC_T9ePzANg" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
     </div>
