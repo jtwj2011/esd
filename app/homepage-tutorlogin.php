@@ -174,7 +174,7 @@
         
 
             $(async() => {           
-                var serviceURL = "http://127.0.0.1:5002/booking/tutee/Jose";
+                var serviceURL = "http://127.0.0.1:5002/booking/tutee/Jose@gmail.com";
         
                 try {
                     const response =
@@ -198,8 +198,8 @@
                             eachRow = 
                                 "<td>" + booking.booking_id + "</td>" +
                                 "<td>" + booking.tutee_id + "</td>" +
-                                "<td>" + booking.payment + "</td>" +
-                                "<td>" + booking.subject + "</td>";
+                                "<td>" + booking.subject + "</td>" +
+                                "<td>" + booking.status + "</td>";
                             // console.log(eachRow);
                             rows += "<tr>" + eachRow + "</tr>";
                             console.log(rows);
