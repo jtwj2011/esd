@@ -1,3 +1,9 @@
+<?php
+$username=$_POST['username'];
+
+?>
+<html>
+
 <head>
    
     
@@ -61,7 +67,7 @@
                 <img src="image/face.jpeg" class="img-responsive">
             </div>
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name">Jose</div>
+                <div class="profile-usertitle-name"><?= $username ?></div>
                 <div class="profile-usertitle-status">Online</div>
             </div>
             <div class="clear"></div>
@@ -144,7 +150,8 @@
                                     "<td>" + tutor.level + "</td>" +
                                     "<td>" + tutor.subject + "</td>" +
                                     "<td>" + tutor.subject_rate + "</td>" +
-                                    "<td>"+"<a href='http://localhost:5001/tutor/profile/"+tutor.tutor_id + "'>" + "Button" +  "</a></td>";
+                                    "<td>"+"<a href='http://localhost:5000/tutee/request/"+tutor.tutor_id+"/"+tutor.subject+ "'>" + "Button" +  "</a></td>";
+                                
                                     
                                 // console.log(eachRow);
                                 rows += "<tr>" + eachRow + "</tr>";
