@@ -1,6 +1,9 @@
 <?php
 
-$username='Jose';
+session_start();
+$tutee_id = $_SESSION['login_id'];
+// echo $tutee_id;
+
 ?>
 
 <!DOCTYPE html>
@@ -106,7 +109,7 @@ $username='Jose';
                             <div class="login-state d-flex align-items-center">
                                 <div class="user-name mr-30">
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $username?></a>
+                                        <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $tutee_id?></a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
                                             <a class="dropdown-item" href="#">Profile</a>
                                             <a class="dropdown-item" href="#">Account Info</a>
@@ -266,6 +269,7 @@ $username='Jose';
     </section>
     <!-- ##### Best Tutors Area End ##### -->
 
+    <!-- ##### Form Start ##### -->
     <div id="main-container" class="container">
         <h1 class="display-4">Request Tutor</h1>
         <form id="form">
@@ -289,12 +293,16 @@ $username='Jose';
 
         $("#form").submit(async (event) => {   
             event.preventDefault(); 
-
+            
+            var tutee_id = '<?php echo $tutee_id; ?>';
             var tutor_id = $("#tutor_id").val();
             var subject = $("#subject").val();
 
-            var addrequest = {tutor_id: tutor_id, 
-                        subject: subject};
+            var addrequest = {
+                tutee_id: tutee_id,
+                tutor_id: tutor_id, 
+                subject: subject
+            };
 
             var serviceURL = "http://127.0.0.1:5000/tutee/request";
 
@@ -321,6 +329,7 @@ $username='Jose';
             }
         });
     </script>
+    <!-- ##### Form End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">

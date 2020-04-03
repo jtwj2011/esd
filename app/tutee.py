@@ -114,9 +114,9 @@ def create_request():
     """Create a new order according to the order_input"""
     status = 200
     message = "Success"
-    tutee_id = "harcodetuteename"
 
     data = request.get_json()
+    tutee_id = data["tutee_id"]
     tutor_id = data["tutor_id"]
     subject = data["subject"]
 
@@ -126,7 +126,7 @@ def create_request():
     jsonobject = json.loads(json_dump)
 
     return send_request(jsonobject)
-    
+
 
 def send_request(request):
     """inform Tutor/Booking Management as needed"""
