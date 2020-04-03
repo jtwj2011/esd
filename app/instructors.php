@@ -171,13 +171,17 @@ $tutee_id = $_SESSION['login_id'];
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t1.png" alt="">
+                                <img src="img/bg-img/face.jpeg" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
-                                <h5>Alex Parker</h5>
-                                <span>Teacher</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                                <h5>Christopher Poskitt</h5>
+                                <span>Senior Tutor</span>
+                                <p>Subject: Chinese</p>
+                                <p>Subject Rate: $50/h</p>
+                                <p>Level: Primary</p>
+                                <span>
+                                <p>Christopher is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -190,13 +194,17 @@ $tutee_id = $_SESSION['login_id'];
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t2.png" alt="">
+                                <img src="img/bg-img/Hong.jpg" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
-                                <h5>Alex Parker</h5>
-                                <span>Teacher</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                            <h5>Ong Hong Seng</h5>
+                                <span>Senior Tutor</span>
+                                <p>Subject: Math</p>
+                                <p>Subject Rate: $50/h</p>
+                                <p>Level: Primary</p>
+                                <span>
+                                <p>Hong Seng is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -209,13 +217,17 @@ $tutee_id = $_SESSION['login_id'];
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t3.png" alt="">
+                                <img src="img/bg-img/YS.jpg" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
-                                <h5>Alex Parker</h5>
-                                <span>Teacher</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                            <h5>Yan Sheng</h5>
+                                <span>Senior Tutor</span>
+                                <p>Subject: Malay</p>
+                                <p>Subject Rate: $35/h</p>
+                                <p>Level: Secondary</p>
+                                <span>
+                                <p>Yan Sheng is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -228,13 +240,17 @@ $tutee_id = $_SESSION['login_id'];
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t4.png" alt="">
+                                <img src="img/bg-img/Saran.jpg" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
-                                <h5>Jose Parker</h5>
-                                <span>Teacher</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                            <h5>Saranpal Singh</h5>
+                                <span>Senior Tutor</span>
+                                <p>Subject: Chinese</p>
+                                <p>Subject Rate: $35/h</p>
+                                <p>Level: Pre-School</p>
+                                <span>
+                                <p>Saranpal is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
@@ -247,13 +263,39 @@ $tutee_id = $_SESSION['login_id'];
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t5.png" alt="">
+                                <img src="img/bg-img/Yifan.jpg" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
-                                <h5>Alex Parker</h5>
-                                <span>Teacher</span>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
+                            <h5>Zhou Yifan</h5>
+                                <span>Senior Tutor</span>
+                                <p>Subject: Tamil</p>
+                                <p>Subject Rate: $35/h</p>
+                                <p>Level: Secondary</p>
+                                <span>
+                                <p>Yifan is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
+                                <div class="social-info">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Single Tutors Slide -->
+                         <div class="single-tutors-slides">
+                            <!-- Tutor Thumbnail -->
+                            <div class="tutor-thumbnail">
+                                <img src="img/bg-img/Maurice.jpg" alt="">
+                            </div>
+                            <!-- Tutor Information -->
+                            <div class="tutor-information text-center">
+                            <h5>Maurice</h5>
+                                <span>Senior Tutor</span>
+                                <p>Subject: Science</p>
+                                <p>Subject Rate: $30/h</p>
+                                <p>Level: Pre-School</p>
+                                <span>
+                                <p>Maurice is a very friendly and outgoing tutor who gives his all in teaching. He always ensures lessons are interesting and clear to tutors and checks their understanding before moving on. Highly recommended.</p>
                                 <div class="social-info">
                                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>

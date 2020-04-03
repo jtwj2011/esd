@@ -122,10 +122,8 @@ def create_request():
 
     booking_id = tutor_id + subject + tutee_id
     json_obj = {"booking_id": booking_id, "tutor_id": tutor_id, "subject": subject, "tutee_id": tutee_id}
-    json_dump = json.dumps(json_obj)
-    jsonobject = json.loads(json_dump)
 
-    return send_request(jsonobject)
+    return send_request(json_obj)
 
 
 def send_request(request):
