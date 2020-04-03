@@ -150,7 +150,7 @@
                     <th>Booking ID</th>
                     <th>Tutee ID</th>
                     <th>Subject</th>
-                    <th>Payment Status</th>
+                    <th>Status</th>
                     
                 </tr>
                 <!-- <tr>
@@ -174,7 +174,7 @@
         
 
             $(async() => {           
-                var serviceURL = "http://127.0.0.1:5002/booking/tutee/Jose";
+                var serviceURL = "http://127.0.0.1:5002/booking/tutee/Jose@gmail.com";
         
                 try {
                     const response =
@@ -198,8 +198,8 @@
                             eachRow = 
                                 "<td>" + booking.booking_id + "</td>" +
                                 "<td>" + booking.tutee_id + "</td>" +
-                                "<td>" + booking.payment + "</td>" +
-                                "<td>" + booking.subject + "</td>";
+                                "<td>" + booking.subject + "</td>" +
+                                "<td>" + booking.status + "</td>";
                             // console.log(eachRow);
                             rows += "<tr>" + eachRow + "</tr>";
                             console.log(rows);
@@ -216,6 +216,67 @@
             });
         // });
     </script>
+    </html>
+
+    <!-- ##### Form Start ##### -->
+    <div id="main-container" class="container">
+        <h1 class="display-4">Request Tutor</h1>
+        <form id="form">
+            Booking ID<br>
+            <input type = "text" id = "booking_id"><br>
+            <br>
+            <button type = "submit" id="submitBtnaccept" class="btn btn-primary" value="accept">Accept</button>
+            <button type = "submit" id="submitBtnreject" class="btn btn-primary" value="reject">Reject</button>
+        </form>
+        <br>
+        <h3 id="errors"></h3>
+    </div>
+
+    <html>
+    <script>
+        function showError(message) {
+
+        $('#errors')
+            .text(message);
+        }
+
+        $("#form").submit(async (event) => {   
+            event.preventDefault(); 
+            
+            var booking_id = $("#booking_id").val();
+            var status = "accept"
+
+            var updateStatus = {
+                booking_id: booking_id, 
+                status: status
+            };
+
+            var serviceURL = "http://127.0.0.1:5001/tutor/accept";
+
+            try {
+                const response =
+                    await fetch(
+                        serviceURL, { 
+                            method: 'POST',
+                            headers: {"Content-Type": "application/json"},
+                            mode: 'cors',
+                            body: JSON.stringify(updateStatus)
+                            });
+
+                const request = await response.json();
+    
+                if (request.message) {
+                    showError(request.message);
+                } else {
+                    showError("Your request has been updated!");
+                }
+            } catch (error) {
+                showError
+                ('There is a problem retrieving the tutor data, please try again later');
+            }
+        });
+    </script>
+    <!-- ##### Form End ##### -->
     </html>
  
 <hr>

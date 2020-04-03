@@ -227,6 +227,49 @@ def filter_by_Tutor_levels(level):
         return jsonify({"Tutor": [tutor.json() for tutor in Tutor.query.filter_by(level=level).all()]})
     return jsonify({"message": "Profile not found."}), 404
 
+@app.route("/tutor/accept", methods = ['POST'])
+def accept_request():
+    """Create a new order according to the order_input"""
+    status = 200
+    message = "Success"
+
+    data = request.get_json()
+    booking_id = data["booking_id"]
+    status = data["status"]
+
+    json_obj = {"booking_id": booking_id, "status": status}
+    json_dump = json.dumps(json_obj)
+    jsonobject = json.loads(json_dump)
+
+    return send_accept(jsonobject)
+
+
+def send_accept(request):
+    """inform Tutor/Booking Management as needed"""
+    hostname = "localhost"
+    port = 5672 # default messaging port.
+    # connect to the broker and set up a communication channel in the connection
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
+    channel = connection.channel()
+
+    # set up the exchange if the exchange doesn't exist
+    exchangename="tutee_topic"
+    channel.exchange_declare(exchange=exchangename, exchange_type='topic')
+
+    # prepare the message body content
+    message = json.dumps(request, default=str) # convert a JSON object to a string
+
+    channel.queue_declare(queue='booking', durable=True)
+    channel.queue_bind(exchange=exchangename, queue='booking', routing_key='#')
+
+    channel.basic_publish(exchange=exchangename, routing_key="tutor.request", body=message,
+        properties=pika.BasicProperties(delivery_mode = 2) # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange)
+        )
+       
+    print("Status updated.")
+    connection.close()
+    return jsonify(request), 201
+
 
 
 
@@ -283,4 +326,4 @@ def filter_by_booking_status(status):
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
-    receiveRequest()
+    # receiveRequest()

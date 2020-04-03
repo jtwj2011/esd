@@ -149,7 +149,7 @@ def send_request(request):
         properties=pika.BasicProperties(delivery_mode = 2) # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange)
         )
        
-    print("Order sent to RequestTutor service.")
+    print("Order sent to Booking service.")
     connection.close()
     return jsonify(request), 201
 
@@ -176,3 +176,5 @@ def filter_by_booking_status(status):
 
 if __name__ == '__main__':
     app.run(port = 5000, debug = True)
+    # request = create_request()
+    # send_request(request)
