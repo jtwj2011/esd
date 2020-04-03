@@ -92,9 +92,9 @@ def processRequest(request):
         text = "You have received a request with booking id " + str(booking_id) +" !"
 
     with app.app_context():  #enable application context to access global variable
-        msg = Message('Tuition request ID: ' + booking_id ,
+        msg = Message('['+booking_id+'] Tuition request update from Tutor Labs',
                         sender='g6t7tuition@gmail.com',
-                        recipients=[email], body=text)
+                        recipients=[email], body="Dear user,\n\n\t"+text+"\n\nBest wishes,\nTutor Labs")
         mail.send(msg)
         result = 'Message Sent!'
     return result
