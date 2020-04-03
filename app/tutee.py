@@ -121,7 +121,7 @@ def create_request():
     tutor_id = data["tutor_id"]
     subject = data["subject"]
 
-    booking_id = tutor_id + subject + tutee_id
+    booking_id = tutor_id + subject + tutee_id.split("@")[0]
     json_obj = {"booking_id": booking_id, "tutor_id": tutor_id, "subject": subject, "tutee_id": tutee_id}
 
     return send_request(json_obj)
