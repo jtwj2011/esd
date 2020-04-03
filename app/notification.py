@@ -78,14 +78,17 @@ def processRequest(request):
     print(request)
 # ---------------------------need to be confirmed------------------------------------
     if 'status' in list(request.keys()) and request['status']=='accept':
-        email = tutee_id
+ #       email = tutee_id
+        email = 'saranpals.2018@smu.edu.sg'
         text = "Your request with booking id " + str(booking_id) +" has been accepted!"
 
     elif 'status' in list(request.keys()) and request['status']=='reject':
-        email = tutee_id
+         #       email = tutee_id
+        email = 'saranpals.2018@smu.edu.sg'
         text = "Your request with booking id " + str(booking_id) +" has been rejected!"
     else:
-        email = tutor_id
+         #       email = tutor_id
+        email = 'saranpals.2018@smu.edu.sg'
         text = "You have received a request with booking id " + str(booking_id) +" !"
 
     with app.app_context():  #enable application context to access global variable
@@ -109,6 +112,6 @@ def processRequest(request):
 
 
 if __name__ == '__main__':
-    print("This is " + os.path.basename(__file__) + ": notifying for a reservation..")
+    print("This is " + os.path.basename(__file__) + ": notifying for a request..")
     receiveRequest()
     app.run(port = 5004, debug=True)
