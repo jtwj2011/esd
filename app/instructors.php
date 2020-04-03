@@ -17,7 +17,7 @@ $tutee_id = $_SESSION['login_id'];
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Clever - Education &amp; Courses Template | Instructors</title>
+    <title>Tutor Labs</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">

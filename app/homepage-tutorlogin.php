@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Clever - Education &amp; Courses Template | Home</title>
+    <title>Tutor Labs</title>
 
     <!-- Favicon -->
     <link rel="icon" href="/img/core-img/favicon.ico">
@@ -140,10 +140,11 @@
     <!-- ##### Request Table##### -->
     </style>
 </head>
-
+<br><br>
 <body>
     <div id="main-container" class="container">
-        <h1 class="display-4">Tutee Requests</h1>
+    <div class="section-heading">
+        <h1 class="display-4"><h1><b>Tutee Requests</h1></b><br>
         <table id="bookingsTable" class='table table-striped' border='1'>
             <thead class='thead-dark'>
                 <tr>
@@ -215,23 +216,26 @@
                 }
             });
         // });
-    </script>
+    </script></div>
     </html>
+    <br><br><br><hr>
 
     <!-- ##### Form Start ##### -->
     <div id="main-container" class="container">
-        <h1 class="display-4">Request Tutor</h1>
-        <form id="form">
-            Booking ID<br>
+    <div class="section-heading">
+        <h2 class="display-4"><b><h1>Confirm Requests</h1></b><br>
+        <form id="form"><h2>
+            Booking ID<br></h2>
             <input type = "text" id = "booking_id"><br>
-            <br>
-            <button type = "submit" id="submitBtnaccept" class="btn btn-primary" value="accept">Accept</button>
+          
+            
+            <button type = "submit" id="submitBtnaccept" class="btn btn-primary" value="accept">Accept</button>&nbsp;&nbsp;
             <button type = "submit" id="submitBtnreject" class="btn btn-primary" value="reject">Reject</button>
         </form>
-        <br>
+        
         <h3 id="errors"></h3>
     </div>
-
+        </div>
     <html>
     <script>
         function showError(message) {
@@ -279,7 +283,7 @@
     <!-- ##### Form End ##### -->
     </html>
  
-<hr>
+
     <!-- ##### Cool Facts Area Start ##### -->
     <section class="cool-facts-area section-padding-100-0">
         <div class="container">

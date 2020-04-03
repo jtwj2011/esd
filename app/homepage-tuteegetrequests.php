@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Clever - Education &amp; Courses Template | Home</title>
+    <title>Tutor Labs</title>
 
     <!-- Favicon -->
     <link rel="icon" href="/img/core-img/favicon.ico">
@@ -216,6 +216,55 @@
     </script>
  </html>
 <hr>
+
+<!---FORM--->
+<div id="main-container" class="container">
+    <div class="section-heading">
+        <h2 class="display-4"><b><h1>Make Payment</h1></b><br>
+        <form id="form">
+            <div class="form"><h2>Booking ID</h2>
+            <input type = "text" id = "tutor_id">
+            
+</div>
+        <h3 id="errors"></h3>
+    </div>
+        </div>
+        <div class="section-heading">
+ <!-- Set up a container element for the button -->
+ <div id="paypal-button-container"></div>
+
+<!-- Include the PayPal JavaScript SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AcA58q5ZmZJI8Xh8m2xQfxFT2NzCUmBp-kwSzyByChNwOvkH1zzoLtNs4VH-XFixlhVV0KI5QHJIswlw&currency=USD"></script>
+
+<script>
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+        style: {
+            layout: 'horizontal'
+        },
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '15.00'
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Show a success message to the buyer
+                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+            });
+        }
+
+    }).render('#paypal-button-container');
+</script>
+</body></div>
+
     <!-- ##### Cool Facts Area Start ##### -->
     <section class="cool-facts-area section-padding-100-0">
         <div class="container">
