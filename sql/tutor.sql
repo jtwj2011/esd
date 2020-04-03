@@ -50,10 +50,7 @@ CREATE TABLE IF NOT EXISTS `tutor`(
 
 INSERT INTO `tutor` (`tutor_id`, `contact_number`, `name`, `level`, `subject`, `subject_rate`, `gender`, `review`, `password_hash`) VALUES
 ('abc@gmail.com', '12345678', 'amy', 'primary', 'Math', '30', 'F', 'best tutor ever!', 'asdfgh'),
-('abc@gmail.com', '12345678', 'amy', 'secondary', 'Science', '25', 'F', 'best tutor ever!', 'asdfgh'),
-('abc@gmail.com', '12345678', 'amy', 'primary', 'Chinese', '35', 'F', 'best tutor ever!', 'asdfgh'),
 ('def@gmail.com', '11111111', 'ben', 'secondary', 'Chinese', '30', 'M', 'most inspiring tutor ever!', 'qwerty'),
-('def@gmail.com', '11111111', 'ben', 'primary', 'English', '20', 'M', 'most inspiring tutor ever!', 'qwerty'),
 ('ghi@gmail.com', '22222222', 'cindy', 'primary', 'English', '20', 'F', 'most interesting tutor ever!', 'qwerty'),
 ('ghi@gmail.com', '22222222', 'cindy', 'pre-school', 'Science', '25', 'F', 'most interesting tutor ever!', 'qwerty');
 COMMIT;

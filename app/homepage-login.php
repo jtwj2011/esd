@@ -1,7 +1,3 @@
-<?php
-$username=$_POST['username'];
-
-?>
 
 
 <!DOCTYPE html>
@@ -96,10 +92,11 @@ $username=$_POST['username'];
                             <div class="login-state d-flex align-items-center">
                                 <div class="user-name mr-30">
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $username?></a>
+                                        <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Jose</a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
                                             <a class="dropdown-item" href="#">Profile</a>
                                             <a class="dropdown-item" href="#">Account Info</a>
+                                            <a class="dropdown-item" href="#">Tutee Requests</a>
                                             <a class="dropdown-item" href="homepage.html">Logout</a>
                                         </div>
                                     </div>

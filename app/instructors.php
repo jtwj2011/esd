@@ -1,4 +1,7 @@
+<?php
 
+$username='Jose';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,9 +93,20 @@
                             </div>
 
                             <!-- Register / Login -->
-                            <div class="register-login-area">
-                                <a href="#" class="btn">Register</a>
-                                <a href="index-login.html" class="btn active">Login</a>
+                            <div class="login-state d-flex align-items-center">
+                                <div class="user-name mr-30">
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $username?></a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
+                                            <a class="dropdown-item" href="#">Profile</a>
+                                            <a class="dropdown-item" href="#">Account Info</a>
+                                            <a class="dropdown-item" href="homepage.html">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="userthumb">
+                                    <img src="img/bg-img/t1.png" alt="">
+                                </div>
                             </div>
 
                         </div>
@@ -205,7 +219,7 @@
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
-                                <h5>Alex Parker</h5>
+                                <h5>Jose Parker</h5>
                                 <span>Teacher</span>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum laoreet elit, sit amet tincidunt mauris ultrices vitae.</p>
                                 <div class="social-info">
@@ -242,138 +256,58 @@
     </section>
     <!-- ##### Best Tutors Area End ##### -->
 
-    <!-- ##### Top Teacher Area Start ##### -->
-    <section class="top-teacher-area section-padding-0-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-heading">
-                        <h3>Top Teachers in Every Field</h3>
-                    </div>
-                </div>
-            </div>
+  <!---FORM--->
+  <div class="container">
+  <div class="section-heading">
+  <div id="booking" class="section">
+            <div class="section-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="booking-form">
+                            <div class="form-header">
+                                <h1>Book A Tutor</h1>
+                            </div>
 
-            <div class="row">
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t1.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
-                        </div>
-                    </div>
-                </div>
+                            <!-- action = "http://localhost:5000/tutee/request" -->
 
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t2.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
-                        </div>
-                    </div>
-                </div>
+                            <form id ="form" action="http://localhost:5000/tutee/request/jose/jose1/maths" method="POST">
+                                <div class="form-header h2",>
+                                    <span class="form-header h2", id="carparkName", style="color:#ffd75e;"></span>
+                                </div>
 
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t3.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
-                        </div>
-                    </div>
-                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <span class="form-label"><h3>Tutor ID<h3></span>
+                                            <input name="tutor_id" id="tutor_id" class="form-control" type="text" placeholder="Enter the Tutor ID" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <span class="form-label"><h3>Subject</span></h3>
+                                            <input name="subject" id="subject" class="form-control" type="text" placeholder="Enter the Subject" required>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
 
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t4.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t5.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t1.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t2.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t3.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Teacher -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-instructor d-flex align-items-center mb-30">
-                        <div class="instructor-thumb">
-                            <img src="img/bg-img/t4.png" alt="">
-                        </div>
-                        <div class="instructor-info">
-                            <h5>Sarah Parker</h5>
-                            <span>Teacher</span>
+                                <div class="form-btn">
+                                <input id="submitForm"class="submit-btn" type="submit" value="Make a Booking">
+                                    <!-- <input class="submit-btn" type="submit" value="Book now">-->
+                                    <!-- <input class="submit-btn" type="submit" value="Book now">-->
+                                </div> 
+                                <input type="hidden" value ="<?=$username?>" name="tutee_id" id="tutee_id">
+                            </form>
+                            <div id="main-container" class="container"> </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- ##### Top Teacher Area End ##### -->
+                            </div>
+                            </div>
+<br><br><br>
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
