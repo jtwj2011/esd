@@ -145,7 +145,7 @@ def send_request(request):
     channel.queue_declare(queue='booking', durable=True)
     channel.queue_bind(exchange=exchangename, queue='booking', routing_key='#')
 
-    channel.basic_publish(exchange=exchangename, routing_key="tutor.request", body=message,
+    channel.basic_publish(exchange=exchangename, routing_key="tutee.request", body=message,
         properties=pika.BasicProperties(delivery_mode = 2) # make message persistent within the matching queues until it is received by some receiver (the matching queues have to exist and be durable and bound to the exchange)
         )
        

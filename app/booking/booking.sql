@@ -47,9 +47,9 @@ CREATE TABLE IF NOT EXISTS `booking` (
 
 
 INSERT INTO `booking` (`booking_id`, `tutor_id`, `tutee_id`, `subject`, `payment`, `status`) VALUES
-('BK001', 'TUT001', 'TEE001', 'Math', 'Pending', 'Ongoing'),
-('BK002', 'TUT002','TEE002', 'Science', 'Success', 'Ongoing');
-('TESTING1', 'Christopher', 'Jose', 'Math', 'Pending', 'Ongoing')
+('Amy@gmail.comMathFrancis', 'Amy@gmail.com', 'Francis@gail.com', 'Math', 'Pending', 'Ongoing'),
+('Cindy@gmail.comEnglishPam', 'Cindy@gmail.com','Pam@gmail.com', 'English', 'Success', 'Ongoing');
+('Darren@gmail.comScienceSaran', 'Darren@gmail.com', 'Saran@gmail.com', 'Science', 'Pending', 'Ongoing')
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
