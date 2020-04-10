@@ -24,18 +24,6 @@ app.config.update(
 mail = Mail(app)
 
 
-hostname = "localhost" # default hostname
-port = 5672 # default port
-# connect to the broker and set up a communication channel in the connection
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
-    # Note: various network firewalls, filters, gateways (e.g., SMU VPN on wifi), may hinder the connections;
-    # If "pika.exceptions.AMQPConnectionError" happens, may try again after disconnecting the wifi and/or disabling firewalls
-channel = connection.channel()
-# set up the exchange if the exchange doesn't exist
-exchangename="tutee_topic"
-channel.exchange_declare(exchange=exchangename, exchange_type='topic')
-
-
 
 def receiveRequest():
     # prepare a queue for receiving messages
@@ -78,13 +66,49 @@ def processRequest(request):
     print(request)
 # ---------------------------need to be confirmed------------------------------------
     if 'status' in list(request.keys()) and request['status']=='accept':
+        hostname = "localhost" # default hostname
+        port = 5672 # default port
+        # connect to the broker and set up a communication channel in the connection
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
+            # Note: various network firewalls, filters, gateways (e.g., SMU VPN on wifi), may hinder the connections;
+            # If "pika.exceptions.AMQPConnectionError" happens, may try again after disconnecting the wifi and/or disabling firewalls
+        channel = connection.channel()
+        # set up the exchange if the exchange doesn't exist
+        exchangename="tutee_topic"
+        channel.exchange_declare(exchange=exchangename, exchange_type='topic')
+
+
         email = tutee_id
         text = "Your request with booking id " + str(booking_id) +" has been accepted!"
 
     elif 'status' in list(request.keys()) and request['status']=='reject':
+        hostname = "localhost" # default hostname
+        port = 5672 # default port
+        # connect to the broker and set up a communication channel in the connection
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
+            # Note: various network firewalls, filters, gateways (e.g., SMU VPN on wifi), may hinder the connections;
+            # If "pika.exceptions.AMQPConnectionError" happens, may try again after disconnecting the wifi and/or disabling firewalls
+        channel = connection.channel()
+        # set up the exchange if the exchange doesn't exist
+        exchangename="tutee_topic"
+        channel.exchange_declare(exchange=exchangename, exchange_type='topic')
+
+
         email = tutee_id
         text = "Your request with booking id " + str(booking_id) +" has been rejected!"
     else:
+        hostname = "localhost" # default hostname
+        port = 5672 # default port
+        # connect to the broker and set up a communication channel in the connection
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host=hostname, port=port))
+            # Note: various network firewalls, filters, gateways (e.g., SMU VPN on wifi), may hinder the connections;
+            # If "pika.exceptions.AMQPConnectionError" happens, may try again after disconnecting the wifi and/or disabling firewalls
+        channel = connection.channel()
+        # set up the exchange if the exchange doesn't exist
+        exchangename="tutor_topic"
+        channel.exchange_declare(exchange=exchangename, exchange_type='topic')
+
+
         email = tutor_id
         text = "You have received a request with booking id " + str(booking_id) +" !"
 
