@@ -3,8 +3,8 @@ Username: christophertutor67@gmail.com
 Password: tutorg6t7
 
 Tutee Test Account
-Username: Jose@gmail.com
-Password: asdfgh
+Username: jose.tutee@gmail.com
+Password: is213g6t7!
 
 Tutor database: tutor.sql
 Tutee database: tutee.sql
