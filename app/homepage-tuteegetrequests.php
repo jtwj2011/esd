@@ -1,3 +1,12 @@
+<?php
+
+session_start();
+$tutee_id = $_SESSION['login_id'];
+// echo $tutee_id;
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,12 +109,12 @@
                             <div class="login-state d-flex align-items-center">
                                 <div class="user-name mr-30">
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Christopher</a>
+                                        <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?=$tutee_id?></a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
                                             <a class="dropdown-item" href="#">Profile</a>
                                             <a class="dropdown-item" href="#">Account Info</a>
-                                            <a class="dropdown-item" href="#">Tutee Requests</a>
-                                            <a class="dropdown-item" href="homepage.html">Logout</a>
+                                            <a class="dropdown-item" href="homepage-tutorgetrequests.php">Confirmed Requests</a>
+                                            <a class="dropdown-item" href="homepage-general.php">Logout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -327,10 +336,7 @@
                         <div class="footer-logo">
                             <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
-                        <!-- Copywrite -->
-                        <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                       
                     </div>
                 </div>
             </div>

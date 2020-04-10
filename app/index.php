@@ -4,14 +4,15 @@ session_start();
 
 $username = $_POST['username'];
 $password = $_POST['password'];
+$role = $_POST['role'];
 
 $_SESSION['login_id'] = $username;
 
-if ($username == 'Jose@gmail.com' && $password == 'asdfgh') {
+if ($role== 'tutee') {
     header("Location: homepage-tuteelogin.php");
 }
 
-if ($username=='Christopher@gmail.com' && $password =='asdfgh'){
+if ($role=='tutor'){
     header("Location: homepage-tutorlogin.php");
        
 }
