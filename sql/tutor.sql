@@ -53,7 +53,7 @@ INSERT INTO `tutor` (`tutor_id`, `contact_number`, `name`, `level`, `subject`, `
 ('Ben@gmail.com', '90283821', 'ben', 'secondary', 'Chinese', '30', 'M', 'most inspiring tutor ever!', 'qwerty'),
 ('Cindy@gmail.com', '98273728', 'cindy', 'primary', 'English', '20', 'M', 'most interesting tutor ever!', 'qwerty'),
 ('Darren@gmail.com', '87261928', 'darren', 'pre-school', 'Science', '25', 'M', 'most interesting tutor ever!', 'qwerty'),
-('Christopher@gmail.com', '87647281', 'christopher', 'pre-school', 'Science', '22', 'M', 'most interesting tutor ever!', 'qwerty');
+('christophertutor67@gmail.com', '87647281', 'christopher', 'pre-school', 'Science', '22', 'M', 'most interesting tutor ever!', 'tutorg6t7');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

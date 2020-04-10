@@ -338,7 +338,7 @@ $tutee_id = $_SESSION['login_id'];
     <div class="section-heading">
         <h2 class="display-4"><b><h1>Request A Tutor</h1></b><br>
         <form id="form">
-            <div class="form"><h2>Tutor ID</h2>
+            <div class="form"><h2>Tutor Name</h2>
             <input type = "text" id = "tutor_id">
             <h2>Subject</h2>
             <input type = "text" id = "subject"><br>
@@ -408,10 +408,7 @@ $tutee_id = $_SESSION['login_id'];
                         <div class="footer-logo">
                             <a href="index.html">Tutor Labs</a>
                         </div>
-                        <!-- Copywrite -->
-                        <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        
                     </div>
                 </div>
             </div>
