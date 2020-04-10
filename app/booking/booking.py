@@ -129,6 +129,18 @@ def accept_booking(booking_id):
 
     return jsonify({"message": "Your booking has been accepted."}), 201
 
+
+@app.route("/booking/updatepayment/<string:booking_id>", methods=['POST'])
+def update_payment_status(booking_id):
+    booking = Booking.query.filter_by(booking_id=booking_id).first()
+    if booking:
+        booking.status = 'success'
+        db.session.commit()
+        return jasonify({"message": "Payment status has been updated"}),201
+    else:
+        return jasonify({"message": "An error occurred updating payment status"}),500
+
+
 @app.route("/booking/reject/<string:booking_id>", methods=['POST'])
 def reject_booking(booking_id):
     print("rejecting...")
